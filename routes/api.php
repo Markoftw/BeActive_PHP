@@ -19,21 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'user'], function() {
     Route::post('login', 'Auth\ApiController@login')->name('api.login');
+    Route::get('data', 'Auth\ApiController@getData')->name('api.userdata')->middleware('jwt.auth');
 });
-
-Route::get('/user/login/true', function (Request $request) {
-
-    $data['success'] = true;
-    $data['name'] = 'Marko';
-
-    return json_encode($data);
-});
-
-Route::post('/user/login/false', function (Request $request) {
-
-    $data['success'] = false;
-    $data['name'] = 'Marko';
-
-    return json_encode($data);
-});
-

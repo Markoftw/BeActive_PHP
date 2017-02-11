@@ -5,6 +5,10 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Route;
+use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 
 class Handler extends ExceptionHandler
 {
@@ -44,6 +48,32 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        if ($exception instanceof \Tymon\JWTAuth\Exceptions\InvalidClaimException && $this->isApiRoute($request)) {
+            return response()->json($exception->getMessage(), 422);
+        } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\JWTException && $this->isApiRoute($request)) {
+            return response()->json($exception->getMessage(), 422);
+        } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\PayloadException && $this->isApiRoute($request)) {
+            return response()->json($exception->getMessage(), 422);
+        } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException && $this->isApiRoute($request)) {
+            return response()->json($exception->getMessage(), 422);
+        } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException && $this->isApiRoute($request)) {
+            return response()->json($exception->getMessage(), 422);
+        } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException && $this->isApiRoute($request)) {
+            return response()->json($exception->getMessage(), 422);
+        } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\UserNotDefinedException && $this->isApiRoute($request)) {
+            return response()->json($exception->getMessage(), 422);
+        } else if (strpos($exception->getMessage(), 'token')) {
+            return response()->json([$exception->getMessage()], $exception->getStatusCode());
+        }
+
+        /*if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+            return response()->json(['token_expired'], $exception->getStatusCode());
+        } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+            return response()->json(['token_invalid'], $exception->getStatusCode());
+        }*/
+
+
         return parent::render($request, $exception);
     }
 
@@ -61,5 +91,16 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest('login');
+    }
+
+    /**
+     * Check for api routes.
+     *
+     * @param Request $request
+     * @return bool
+     */
+    protected function isApiRoute($request)
+    {
+        return $request->route() && in_array('api', $request->route()->middleware());
     }
 }

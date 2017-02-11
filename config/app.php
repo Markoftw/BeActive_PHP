@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
 
     ],
