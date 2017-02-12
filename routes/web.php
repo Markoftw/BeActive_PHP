@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/apk', 'APKController@showAll')->name('apklisting');
+Route::get('/apk/download/{filename}', 'APKController@download')->name('apkdownload');
