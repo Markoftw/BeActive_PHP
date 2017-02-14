@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\API;
 
 use App\User;
 use Auth;
@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
 
-class ApiController extends Controller
+class AuthController extends Controller
 {
     public function __construct()
     {

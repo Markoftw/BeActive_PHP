@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'user'], function() {
-    Route::post('login', 'Auth\ApiController@login')->name('api.login');
-    Route::get('data', 'Auth\ApiController@getData')->name('api.userdata')->middleware('jwt.auth');
+    Route::post('login', 'API\AuthController@login')->name('api.login');
+    Route::get('data', 'API\AuthController@getData')->name('api.userdata')->middleware('jwt.auth');
 });

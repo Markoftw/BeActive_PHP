@@ -60,7 +60,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="/home">
+                                        <a href="{{ url('/home') }}">
                                             Dashboard
                                         </a>
                                     </li>

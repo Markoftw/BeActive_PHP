@@ -8,6 +8,11 @@ use Storage;
 class APKController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function showAll()
     {
         $files = Storage::files('apks');
@@ -34,7 +39,10 @@ class APKController extends Controller
     {
         if(Storage::exists('apks/' . $filename)) {
             //Storage::get('apks/' . $filename);
-            return response()->download('/var/www/html/beactive/storage/app/apks/' . $filename);
+            $headers = [
+                'Content-Type'=>'application/vnd.android.package-archive'
+            ];
+            return response()->download('/var/www/html/beactive/storage/app/apks/' . $filename, $filename, $headers);
         } else {
             return view('apklisting');
         }
