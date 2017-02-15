@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'user'], function() {
     Route::post('/login', 'API\AuthController@login')->name('api.login');
     Route::get('/data', 'API\AuthController@getData')->name('api.userdata')->middleware('jwt.auth');
-    Route::post('/store/image', 'API\PicturesController@store')->name('api.storeimage');
+    Route::post('/store/image', 'API\PicturesController@store')->name('api.storeimage')->middleware('jwt.auth');
 });

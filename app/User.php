@@ -28,6 +28,16 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class);
+    }
+
+    public function upload(Upload $upload)
+    {
+        $this->uploads()->save($upload);
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT
      *
