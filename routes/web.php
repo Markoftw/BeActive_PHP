@@ -21,3 +21,6 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/apk', 'APKController@showAll')->name('apklisting');
 Route::get('/apk/download/{filename}', 'APKController@download')->name('apkdownload');
+
+Route::get('/gallery', 'API\PicturesController@getAll')->name('gallery');
+Route::get('/images/{filename}', 'API\PicturesController@images')->name('images');
