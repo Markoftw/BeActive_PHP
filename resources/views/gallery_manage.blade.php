@@ -6,9 +6,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Personal Gallery (Uploads)</h4>
+                        <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Manage Personal Gallery</h4>
                         <div class="btn-group pull-right">
-                            <a href="{{ route('images.manage') }}" class="btn btn-primary">Manage</a>
                         </div>
                     </div>
 
@@ -16,12 +15,17 @@
 
                         @if(count($images))
                             @foreach($images as $image)
-                                <a href="{{ route('images', $image->name) }}" target="_blank"><img
-                                            src="{{ route('images', $image->name) }}" alt="{{ $image->name }}"
-                                            height="300" width="272"></a>
+                                <ul>
+                                    <li><img src="{{ route('images', $image->name) }}" alt="{{ $image->name }}"
+                                             height="50" width="50">
+
+                                        <div class="btn-group pull-right">
+                                            <a href="{{ route('images.delete', $image) }}" class="btn btn-danger">Delete</a>
+                                        </div>
+                                </ul>
                             @endforeach
                         @else
-                            Gallery is empty, upload some images with the phone application!
+                            No files have been found
                         @endif
 
                     </div>

@@ -10,6 +10,11 @@ use JWTAuth;
 
 class PicturesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['getAll', 'images', 'manage', 'delete']]);
+    }
+
     public function getAll()
     {
         $images = auth()->user()->uploads()->get();
@@ -58,5 +63,19 @@ class PicturesController extends Controller
         }
 
         return ['file_already_exists' => true];
+    }
+
+    public function manage()
+    {
+        $images = auth()->user()->uploads()->get();
+        if($images) {
+            return view('gallery_manage')->with(['images' => $images]);
+        }
+        return abort(404);
+    }
+
+    public function delete()
+    {
+        return back();
     }
 }

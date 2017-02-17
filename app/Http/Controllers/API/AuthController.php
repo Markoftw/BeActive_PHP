@@ -51,6 +51,18 @@ class AuthController extends Controller
         return response()->json(['success' => true, 'username'=> $user->name, 'token' => $token]);
     }
 
+    public function getUser()
+    {
+        $user_id = JWTAuth::parseToken()->authenticate()->id;
+        $user = User::where('id', $user_id)->first();
+
+        if($user) {
+            return response()->json(['success' => true, 'username'=> $user->name]);
+        }
+
+        return abort(404);
+    }
+
     public function getData()
     {
         return ['test' => true];
