@@ -70,6 +70,11 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="{{ route('notifications') }}">
+                                            Notifications
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('gallery') }}">
                                             Gallery
                                         </a>

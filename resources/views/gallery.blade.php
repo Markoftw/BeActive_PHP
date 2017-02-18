@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Personal Gallery (Uploads)</h4>
+                        <h4 class="panel-title pull-left" style="padding-top: 7px;">Personal Gallery (Uploads)</h4>
                         <div class="btn-group pull-right">
                             <a href="{{ route('images.manage') }}" class="btn btn-primary">Manage</a>
                         </div>

@@ -21,5 +21,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::post('/login', 'API\AuthController@login')->name('api.login');
     Route::post('/login/user', 'API\AuthController@getUser')->name('api.loginuser')->middleware('jwt.auth');
     Route::get('/data', 'API\AuthController@getData')->name('api.userdata')->middleware('jwt.auth');
+    Route::post('/register/device', 'API\AuthController@registerDevice')->name('register.device')->middleware('jwt.auth');
+
     Route::post('/store/image', 'API\PicturesController@store')->name('api.storeimage')->middleware('jwt.auth');
 });

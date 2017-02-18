@@ -63,6 +63,11 @@ class AuthController extends Controller
         return abort(404);
     }
 
+    public function registerDevice()
+    {
+        return ['success' => true];
+    }
+
     public function getData()
     {
         return ['test' => true];

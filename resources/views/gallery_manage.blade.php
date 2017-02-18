@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Manage Personal Gallery</h4>
+                        <h4 class="panel-title pull-left" style="padding-top: 7px;">Manage Personal Gallery</h4>
                         <div class="btn-group pull-right">
                         </div>
                     </div>
