@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Device;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class AuthController extends Controller
 
         try {
             // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {
@@ -48,7 +49,7 @@ class AuthController extends Controller
         $user = Auth::user();
 
         // all good so return the token
-        return response()->json(['success' => true, 'username'=> $user->name, 'token' => $token]);
+        return response()->json(['success' => true, 'username' => $user->name, 'token' => $token]);
     }
 
     public function getUser()
@@ -56,16 +57,43 @@ class AuthController extends Controller
         $user_id = JWTAuth::parseToken()->authenticate()->id;
         $user = User::where('id', $user_id)->first();
 
-        if($user) {
-            return response()->json(['success' => true, 'username'=> $user->name]);
+        if ($user) {
+            return response()->json(['success' => true, 'username' => $user->name]);
         }
 
         return abort(404);
     }
 
-    public function registerDevice()
+    public function registerDevice(Request $request)
     {
-        return ['success' => true];
+        /*$this->validate($request, [
+            'device_token' => 'required'
+        ]);*/
+
+        $token = $request->only('device_token');
+
+        $exists = Device::where($token)->get();
+
+        if (count($exists)) {
+            return ['success' => true, 'status' => 'exists'];
+        }
+
+        $user_id = JWTAuth::parseToken()->authenticate()->id;
+        $data = Device::where('user_id', $user_id)->get();
+
+        if(count($data)) {
+            $data = Device::where('user_id', $user_id)->update($token);
+            if(count($data)) {
+                return ['success' => true, 'status' => 'updated'];
+            }
+            return ['success' => false];
+        }
+
+        auth()->user()->device(
+            new Device(['device_token' => $token['device_token']])
+        );
+
+        return ['success' => true, 'status' => 'new'];
     }
 
     public function getData()

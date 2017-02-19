@@ -28,6 +28,16 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
+
+    public function device(Device $device)
+    {
+        $this->devices()->save($device);
+    }
+
     public function uploads()
     {
         return $this->hasMany(Upload::class);
