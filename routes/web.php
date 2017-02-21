@@ -29,3 +29,6 @@ Route::get('/images/{filename}', 'API\PicturesController@images')->name('images'
 
 Route::get('/admin/notifications', 'NotificationsController@show')->name('notifications');
 Route::post('/admin/notifications', 'NotificationsController@broadcast')->name('notifications.broadcast');
+
+Route::get('/reviews/create', 'API\ReviewController@create')->name('reviews.create');
+Route::get('/reviews/show', 'API\ReviewController@show')->name('reviews.show');

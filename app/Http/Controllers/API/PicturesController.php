@@ -24,9 +24,18 @@ class PicturesController extends Controller
         return abort(404);
     }
 
-    public function images($filename)
+    public function images(Request $request, $filename)
     {
-        $user = auth()->user()->id;
+        $headerAuth = $request->header('Authorization');
+        $user = '';
+        if(!is_null($headerAuth)) {
+            $user_id = JWTAuth::parseToken()->authenticate()->id;
+            if(is_numeric($user_id) && !is_null($user_id)) {
+                $user = $user_id;
+            }
+        } else {
+            $user = auth()->user()->id;
+        }
 
         $path = "pictures/" . $user . "/" . $filename;
         if (!Storage::exists($path)) abort(404);
@@ -68,7 +77,7 @@ class PicturesController extends Controller
     public function manage()
     {
         $images = auth()->user()->uploads()->get();
-        if($images) {
+        if(count($images)) {
             return view('gallery_manage')->with(['images' => $images]);
         }
         return abort(404);
