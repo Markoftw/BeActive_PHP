@@ -32,6 +32,30 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
 
+    /**
+     * Check if user has the role within views
+     * @param $role
+     * @return bool
+     */
+    public function hasLevel($level)
+    {
+        $user = $this->roles;
+
+        return $user[0]->level <= $level;
+    }
+
+    /**
+     * Check if user has the role within views
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        $user = $this->roles;
+
+        return $user[0]->slug == $role;
+    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);

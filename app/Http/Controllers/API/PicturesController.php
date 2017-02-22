@@ -12,7 +12,8 @@ class PicturesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['getAll', 'images', 'manage', 'delete']]);
+        // 'images',
+        $this->middleware('auth', ['only' => ['getAll', 'manage', 'delete']]);
     }
 
     public function getAll()

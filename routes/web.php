@@ -32,3 +32,6 @@ Route::post('/admin/notifications', 'NotificationsController@broadcast')->name('
 
 Route::get('/reviews/create', 'API\ReviewController@create')->name('reviews.create');
 Route::get('/reviews/show', 'API\ReviewController@show')->name('reviews.show');
+
+Route::get('/roles/create', 'API\AuthController@addRoles')->name('roles.create');
+Route::get('/roles/show', 'API\AuthController@getRoles')->name('roles.get');

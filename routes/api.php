@@ -23,5 +23,6 @@ Route::group(['prefix' => 'user'], function() {
     Route::get('/data', 'API\AuthController@getData')->name('api.userdata')->middleware('jwt.auth');
     Route::post('/register/device', 'API\AuthController@registerDevice')->name('register.device')->middleware('jwt.auth');
 
-    Route::post('/store/image', 'API\PicturesController@store')->name('api.storeimage')->middleware('jwt.auth');
+    Route::post('/store/image', 'API\PicturesController@store')->name('api.store.image')->middleware('jwt.auth');
+    Route::post('/reviews/view', 'API\ReviewController@show')->name('api.reviews.show')->middleware('jwt.auth');
 });

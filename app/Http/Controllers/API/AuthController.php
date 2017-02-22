@@ -96,6 +96,28 @@ class AuthController extends Controller
         return ['success' => true, 'status' => 'new'];
     }
 
+    public function addRoles()
+    {
+        $user = User::find(2);
+
+        $user->roles()->attach(3);
+
+        return ['success' => true];
+    }
+
+    public function getRoles()
+    {
+        $user = auth()->user()->hasRole('developer');
+
+        if($user) {
+            $msg = "Yes";
+        } else {
+            $msg = "No";
+        }
+
+        return $msg;
+    }
+
     public function getData()
     {
         return ['test' => true];

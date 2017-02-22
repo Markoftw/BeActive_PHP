@@ -16,8 +16,8 @@ class ReviewController extends Controller
 
         Review::create([
             'user_id' => $user_id,
-            'picture_url' => 'http://beactive.marefx.com/images/66409f12-bca1-4399-b2b7-1645f65923931556389027.jpg',
-            'review_text' => 'Testing reviews!'
+            'picture_url' => 'JPEG_20170216_093500_-1148894724.jpg',
+            'review_text' => 'Testing reviews 2!'
         ]);
 
         return ['success' => true];
