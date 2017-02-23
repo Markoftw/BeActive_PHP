@@ -30,6 +30,8 @@ Route::get('/images/{filename}', 'API\PicturesController@images')->name('images'
 Route::get('/admin/notifications', 'NotificationsController@show')->name('notifications');
 Route::get('/admin/notifications/get', 'NotificationsController@getRegistrationIDs')->name('notifications.test');
 Route::post('/admin/notifications', 'NotificationsController@broadcast')->name('notifications.broadcast');
+Route::get('/admin/notifications/notify/{token}', 'NotificationsController@notify')->name('notifications.notify');
+Route::post('/admin/notifications/notify/{token}', 'NotificationsController@sendNotify')->name('notifications.notify.send');
 
 Route::get('/reviews/create', 'API\ReviewController@create')->name('reviews.create');
 Route::get('/reviews/show', 'API\ReviewController@show')->name('reviews.show');

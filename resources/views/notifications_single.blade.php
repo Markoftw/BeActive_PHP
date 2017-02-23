@@ -20,30 +20,19 @@
                                 </div>
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('notifications.broadcast') }}">
+                        <form method="POST" action="{{ route('notifications.notify.send',$token) }}">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label for="title">Broadcast title to all:</label>
+                                <label for="title">Notification title:</label>
                                 <input type="text" id="title" name="title" class="form-control" placeholder="Title" />
                             </div>
                             <div class="form-group">
-                                <label for="message">Broadcast message to all:</label>
+                                <label for="message">Notification message:</label>
                                 <textarea id="message" name="message" class="form-control" placeholder="Message"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary pull-right">Broadcast</button>
+                            <button type="submit" class="btn btn-primary pull-right">Send notification</button>
                         </form>
-                        <br/>
-                        <hr>
-                        @if(count($devices))
-                            <ul>
-                            @foreach($devices as $device)
-                                <li>
-                                    {{ $device->user->name }}, Registered device since: {{ $device->created_at }}, last changed: {{ $device->updated_at }}
-                                    <span class="pull-right"><a href="{{ route('notifications.notify', $device->device_token) }}" class="btn btn-default">Notify</a></span>
-                                </li>
-                            @endforeach
-                            </ul>
-                        @endif
+
                     </div>
                 </div>
             </div>

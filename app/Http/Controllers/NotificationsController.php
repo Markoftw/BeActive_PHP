@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Device;
+use App\User;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
@@ -19,7 +20,44 @@ class NotificationsController extends Controller
 
     public function show()
     {
-        return view('notifications');
+        $devices = Device::with('user')->get();
+        return view('notifications')->with('devices', $devices);
+    }
+
+    public function sendNotify(Request $request, $token)
+    {
+        $this->validate($request, [
+            'title' => 'required|min:2|max:25',
+            'message' => 'required|min:5|max:50'
+        ]);
+
+        $data = $request->only('title', 'message');
+
+        $msg = array(
+            'message' => $data['message'],
+            'title' => $data['title'],
+            'subtitle' => 'Subtitle Message',
+            'tickerText' => 'Ticker Message',
+            'vibrate' => 1,
+            'sound' => 1,
+            'largeIcon' => 'large_icon',
+            'smallIcon' => 'small_icon'
+        );
+
+        $fields = array(
+            'registration_ids' => [$token],
+            'data' => $msg
+        );
+
+
+        $this->sendBroadcast($fields);
+
+        return view('notifications_single')->with('message', true)->with('token', $token);
+    }
+
+    public function notify($token)
+    {
+        return view('notifications_single')->with('token', $token);
     }
 
     public function broadcast(Request $request)
