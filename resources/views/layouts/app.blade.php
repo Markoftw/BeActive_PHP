@@ -69,11 +69,20 @@
                                             APK history
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('notifications') }}">
-                                            Notifications
-                                        </a>
-                                    </li>
+                                    @if(Auth::user()->hasLevel(1337))
+                                        <li>
+                                            <a href="{{ route('notifications') }}">
+                                                Notifications
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if(Auth::user()->hasLevel(1337))
+                                        <li>
+                                            <a href="{{ route('reviews.show') }}">
+                                                Reviews
+                                            </a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('gallery') }}">
                                             Gallery

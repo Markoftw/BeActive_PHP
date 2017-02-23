@@ -19,7 +19,8 @@ class CreateReviewsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('picture_url');
             $table->text('review_text');
-            $table->string('review', 12)->default('waiting');
+            $table->string('review', 11)->default('waiting');
+            $table->text('reason')->nullable();
             $table->timestamps();
         });
     }

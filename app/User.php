@@ -28,20 +28,25 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    /**
+     * Show all User roles
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function roles(){
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
 
     /**
      * Check if user has the role within views
-     * @param $role
+     * @param $level
      * @return bool
+     * @internal param $role
      */
     public function hasLevel($level)
     {
         $user = $this->roles;
 
-        return $user[0]->level <= $level;
+        return $user[0]->level >= $level;
     }
 
     /**
@@ -56,26 +61,46 @@ class User extends Authenticatable implements JWTSubject
         return $user[0]->slug == $role;
     }
 
+    /**
+     * Show all reviews by User
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
+    /**
+     * Show all User devices
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function devices()
     {
         return $this->hasMany(Device::class);
     }
 
+    /**
+     * Save a new device for the User
+     * @param Device $device
+     */
     public function device(Device $device)
     {
         $this->devices()->save($device);
     }
 
+    /**
+     * Show all uploads User has made
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function uploads()
     {
         return $this->hasMany(Upload::class);
     }
 
+    /**
+     * Save a new picture by User
+     * @param Upload $upload
+     */
     public function upload(Upload $upload)
     {
         $this->uploads()->save($upload);

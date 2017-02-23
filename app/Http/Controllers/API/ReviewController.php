@@ -23,6 +23,12 @@ class ReviewController extends Controller
         return ['success' => true];
     }
 
+    public function store(Request $request)
+    {
+        $req = $request->only('post_id', 'choice', 'reason');
+        return ['success' => true, 'status' => $req];
+    }
+
     public function show(Request $request)
     {
         $headerAuth = $request->header('Authorization');
@@ -41,16 +47,5 @@ class ReviewController extends Controller
 
         }
         return ['success' => true, 'status' => 'none'];
-    }
-
-    private function isAdmin(User $collection)
-    {
-        $admin = $collection->roles()->get()->contains(function ($key, $value) {
-            return $value['level'] >= 1337;
-        });
-        if ($admin && is_numeric($admin)) {
-            return true;
-        }
-        return false;
     }
 }

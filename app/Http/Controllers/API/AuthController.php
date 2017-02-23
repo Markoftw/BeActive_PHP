@@ -107,7 +107,7 @@ class AuthController extends Controller
 
     public function getRoles()
     {
-        $user = auth()->user()->hasRole('developer');
+        $user = auth()->user()->hasLevel(1337);
 
         if($user) {
             $msg = "Yes";

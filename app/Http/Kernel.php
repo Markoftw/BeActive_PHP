@@ -61,5 +61,7 @@ class Kernel extends HttpKernel
         'jwt.base' => \Tymon\JWTAuth\Http\Middleware\BaseMiddleware::class,
         'jwt.check' => \Tymon\JWTAuth\Http\Middleware\Check::class,
         'jwt.auth_renew' => \Tymon\JWTAuth\Http\Middleware\AuthenticateAndRenew::class,
+        'admins.level' => \App\Http\Middleware\CheckUserLevel::class,
+        'admins.role' => \App\Http\Middleware\CheckUserRole::class,
     ];
 }

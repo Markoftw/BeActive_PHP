@@ -25,4 +25,5 @@ Route::group(['prefix' => 'user'], function() {
 
     Route::post('/store/image', 'API\PicturesController@store')->name('api.store.image')->middleware('jwt.auth');
     Route::post('/reviews/view', 'API\ReviewController@show')->name('api.reviews.show')->middleware('jwt.auth');
+    Route::post('/reviews/store', 'API\ReviewController@store')->name('api.reviews.store')->middleware('jwt.auth');
 });
