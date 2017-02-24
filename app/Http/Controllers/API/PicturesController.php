@@ -48,11 +48,12 @@ class PicturesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'image' => 'required'
+            'image' => 'required',
+            'opis' => 'required'
         ]);
 
         $user_id = JWTAuth::parseToken()->authenticate()->id;
-        $data = $request->only('name', 'image');
+        $data = $request->only('name', 'image', 'opis');
         $decode = base64_decode($data['image']);
         $file_name_explode = explode('/', $data['name']);
         $num_explode = count($file_name_explode);
@@ -63,7 +64,7 @@ class PicturesController extends Controller
 
         if (!$exists) {
             auth()->user()->upload(
-                new Upload(['name' => $file_name])
+                new Upload(['name' => $file_name, 'opis' => $data['opis']])
             );
 
             //Storage::disk('uploads')->put("pictures/".$user_id."/" . $file_name, $decode);

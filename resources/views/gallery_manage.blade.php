@@ -18,7 +18,7 @@
                                 <ul>
                                     <li><img src="{{ route('images', $image->name) }}" alt="{{ $image->name }}"
                                              height="50" width="50">
-
+                                        <span>Opis: {{ $image->opis }}</span>
                                         <div class="btn-group pull-right">
                                             <a href="{{ route('images.delete', $image) }}" class="btn btn-danger">Delete</a>
                                         </div>

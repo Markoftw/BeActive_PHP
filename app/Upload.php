@@ -15,7 +15,7 @@ class Upload extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'opis'
     ];
 
     /**
