@@ -26,7 +26,18 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $req = $request->only('post_id', 'choice', 'reason');
-        return ['success' => true, 'status' => $req];
+
+        $review = Review::find($req['post_id']);
+        if($req['choice'] == 'No') {
+            $review->review = "Disapproved";
+            $review->reason = $req['reason'];
+        } else {
+            $review->review = "Approved";
+            $review->reason = "ok";
+        }
+        $review->save();
+
+        return ['success' => true];
     }
 
     public function show(Request $request)

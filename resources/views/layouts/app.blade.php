@@ -72,14 +72,14 @@
                                     @if(Auth::user()->hasLevel(1337))
                                         <li>
                                             <a href="{{ route('notifications') }}">
-                                                Notifications
+                                                Admin: Notifications
                                             </a>
                                         </li>
                                     @endif
                                     @if(Auth::user()->hasLevel(1337))
                                         <li>
-                                            <a href="{{ route('reviews.show') }}">
-                                                Reviews
+                                            <a href="{{ route('admin.reviews.show') }}">
+                                                Admin: Reviews
                                             </a>
                                         </li>
                                     @endif

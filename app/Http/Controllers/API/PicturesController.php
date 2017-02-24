@@ -13,7 +13,7 @@ class PicturesController extends Controller
     public function __construct()
     {
         // 'images',
-        $this->middleware('auth', ['only' => ['getAll', 'manage', 'delete']]);
+        $this->middleware('auth', ['only' => ['getAll', 'manage', 'delete', 'imagesPublic']]);
     }
 
     public function getAll()
@@ -39,6 +39,14 @@ class PicturesController extends Controller
         }
 
         $path = "pictures/" . $user . "/" . $filename;
+        if (!Storage::exists($path)) abort(404);
+
+        return response(Storage::get($path), 200)->header('Content-Type', 'image/jpeg');
+    }
+
+    public function imagesPublic($userID, $filename)
+    {
+        $path = "pictures/" . $userID . "/" . $filename;
         if (!Storage::exists($path)) abort(404);
 
         return response(Storage::get($path), 200)->header('Content-Type', 'image/jpeg');
