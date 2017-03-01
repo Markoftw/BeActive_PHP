@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -24,34 +25,63 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        /*$credentials = $request->only('username', 'password');
-        $results = ['success' => true, 'username' => $credentials['username'], 'password' => $credentials['password']];
-        return response($results, 200);*/
+        /*$this->validate($request, [
+            'device_token' => 'required',
+            'name' => 'required',
+            'password' => 'required'
+        ]);*/
 
         // grab credentials from the request
         //$credentials = $request->only('email', 'password');
         $credentials = $request->only('name', 'password');
-
-        //$user = User::where('email', $credentials['email'])->first();
-
+        $device_token = $request->only('device_token');
+        $cred_master = ['name' => $credentials['name'], 'password' => $credentials['password']];
         try {
+            $status = null;
             // attempt to verify the credentials and create a token for the user
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+            if (!$token = JWTAuth::attempt($cred_master)) {
+                $status = "Guest";
+                $user_guest = User::where('name', $credentials['name'])->get();
+                if(count($user_guest)) {
+                    $usr = User::find($user_guest[0]->id);
+                    if(Hash::check($credentials['password'], $user_guest[0]->guest_password)) {
+                        if(!$token = JWTAuth::fromUser($usr)) {
+                            return response()->json(['error' => 'invalid_credentials'], 401);
+                        }
+                    }
+                } else {
+                    return response()->json(['error' => 'invalid_credentials'], 401);
+                }
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        $user = Auth::user();
-        $user_updater = User::find($user->id);
+        $status = (!is_null($status)) ? 'Guest' : 'Member';
+        if($status == 'Member') {
+            $user = Auth::user();
+            $user_updater = User::find($user->id);
+            $user_updater->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
+            $user_updater->save();
 
-        $user_updater->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
-        $user_updater->save();
+            auth()->user()->device(
+                new Device(['device_type' => 'Member', 'device_token' => $device_token['device_token']])
+            );
+            return response()->json(['success' => true, 'username' => $user->name, 'status' => $status, 'token' => $token]);
+        } else if ($status == 'Guest' && $token) {
+            $user_guest = User::where('name', $credentials['name'])->get();
 
-        // all good so return the token
-        return response()->json(['success' => true, 'username' => $user->name, 'token' => $token]);
+            $device = new Device();
+            $device->user_id = $user_guest[0]->id;
+            $device->device_type = 'Guest';
+            $device->device_token = $device_token['device_token'];
+            $device->save();
+
+            return response()->json(['success' => true, 'username' => $user_guest[0]->name, 'status' => $status, 'token' => $token]);
+        } else {
+            return response()->json(['error' => 'invalid_credentials'], 401);
+        }
     }
 
     public function getUser()
@@ -100,6 +130,22 @@ class AuthController extends Controller
         return ['success' => true, 'status' => 'new'];
     }
 
+    public function deleteDevice(Request $request)
+    {
+        $token = $request->only('device_token');
+        $deleted = Device::where($token);
+
+        $device = $deleted->get();
+
+        if($device[0]->user_id == JWTAuth::parseToken()->authenticate()->id) {
+            $deleted->delete();
+            if(count($deleted)) {
+                return ['success' => true, 'status' => 'deleted'];
+            }
+        }
+        return ['success' => false, 'status' => 'access_denied'];
+    }
+
     public function addRoles()
     {
         $user = User::find(2);
@@ -129,6 +175,9 @@ class AuthController extends Controller
 
     public function setPassword(Request $request)
     {
+        $user = User::find(4);
+        $user->guest_password = bcrypt("natakar");
+        $user->save();
         return ['test' => true];
     }
 

@@ -19,11 +19,10 @@ class ReviewController extends Controller
         $reviews = Review::with('user')->where('review', 'waiting')->orderBy('created_at', 'desc')->get();
         $reviews_done = Review::with('user')->where('review', '!=' , 'waiting')->orderBy('updated_at', 'desc')->get();
 
-        if(count($reviews)) {
+        //if(count($reviews)) {
             return view('reviews')->with('reviews', $reviews)->with('reviews_done', $reviews_done);
-
-        }
-        return ['success' => true, 'status' => 'none'];
+        //}
+        //return ['success' => true, 'status' => 'none'];
     }
 
     public function showCreate()

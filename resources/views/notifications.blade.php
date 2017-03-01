@@ -38,7 +38,7 @@
                             <ul>
                             @foreach($devices as $device)
                                 <li>
-                                    <b>{{ $device->user->name }}</b>, Registered device since: {{ $device->created_at }}, last changed: {{ $device->updated_at }}
+                                    <b>{{ $device->user->name }}</b>, Status: {{ $device->device_type }}, Registered device since: {{ $device->created_at }}, last changed: {{ $device->updated_at }}
                                     <span class="pull-right"><a href="{{ route('notifications.notify', $device->device_token) }}" class="btn btn-default">Notify</a></span>
                                 </li>
                                 <hr/>
