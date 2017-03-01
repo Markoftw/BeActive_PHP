@@ -14,7 +14,7 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'device_token'
+        'device_type', 'device_token'
     ];
 
     /**

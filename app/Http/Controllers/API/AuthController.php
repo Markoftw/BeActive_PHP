@@ -25,14 +25,12 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         /*$credentials = $request->only('username', 'password');
-
         $results = ['success' => true, 'username' => $credentials['username'], 'password' => $credentials['password']];
-
         return response($results, 200);*/
 
-
         // grab credentials from the request
-        $credentials = $request->only('email', 'password');
+        //$credentials = $request->only('email', 'password');
+        $credentials = $request->only('name', 'password');
 
         //$user = User::where('email', $credentials['email'])->first();
 
@@ -47,6 +45,10 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
+        $user_updater = User::find($user->id);
+
+        $user_updater->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
+        $user_updater->save();
 
         // all good so return the token
         return response()->json(['success' => true, 'username' => $user->name, 'token' => $token]);
@@ -58,6 +60,8 @@ class AuthController extends Controller
         $user = User::where('id', $user_id)->first();
 
         if ($user) {
+            $user->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
+            $user->save();
             return response()->json(['success' => true, 'username' => $user->name]);
         }
 
@@ -90,7 +94,7 @@ class AuthController extends Controller
         }
 
         auth()->user()->device(
-            new Device(['device_token' => $token['device_token']])
+            new Device(['device_type' => 'admin', 'device_token' => $token['device_token']])
         );
 
         return ['success' => true, 'status' => 'new'];
@@ -119,6 +123,11 @@ class AuthController extends Controller
     }
 
     public function getData()
+    {
+        return ['test' => true];
+    }
+
+    public function setPassword(Request $request)
     {
         return ['test' => true];
     }
