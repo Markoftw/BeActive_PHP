@@ -44,3 +44,5 @@ Route::get('/roles/create', 'API\AuthController@addRoles')->name('roles.create')
 Route::get('/roles/show', 'API\AuthController@getRoles')->name('roles.get');
 
 Route::get('/testing', 'API\AuthController@setPassword')->name('testing');
+Route::get('/about', 'AboutController@show')->name('about');
+Route::get('/terms', 'TermsController@show')->name('terms');

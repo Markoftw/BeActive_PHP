@@ -72,6 +72,10 @@ class AuthController extends Controller
         } else if ($status == 'Guest' && $token) {
             $user_guest = User::where('name', $credentials['name'])->get();
 
+            $last_seen = User::find($user_guest[0]->id);
+            $last_seen->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
+            $last_seen->save();
+
             $device = new Device();
             $device->user_id = $user_guest[0]->id;
             $device->device_type = 'Guest';
@@ -175,10 +179,14 @@ class AuthController extends Controller
 
     public function setPassword(Request $request)
     {
-        $user = User::find(4);
+        /*$user = User::find(4);
         $user->guest_password = bcrypt("natakar");
         $user->save();
-        return ['test' => true];
+        return ['test' => true];*/
+
+        $result = isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'null';
+
+        return $result;
     }
 
 }

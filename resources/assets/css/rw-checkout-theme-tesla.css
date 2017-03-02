@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+/*-----------------------------------------------------------------------------------
+
+	RippleWise Checkout Theme v1.0.0
+
+	Author: Enej Pungercar
+	Author URL: http://www.behance.net/aeneas
+	Copyright: 2014 RippleWise
+ 
+-------------------------------------------------------------------------------------
+
+	0.	Styles
+
+------------------------------------------------------------------------------------ */
+
+/*-----------------------------------------------------------------------------------*/
+/*	0.	Styles
+/*-----------------------------------------------------------------------------------*/
+body.rw-checkout {
+		background: #474C5A;
+}
+body.rw-checkout h1 {
+		color: #F34755;
+}
+#rw-checkout header h1 a,
+#rw-checkout header h1 {
+		color: #F34755;
+}
+#rw-checkout header span.logo {
+		background-color: #F34755;
+}
+#rw-checkout header span.logo.image {
+		background-image: url(../img/logo_tesla.png);
+}
+#rw-checkout .left .body  .status .circle-data span {
+		color: #F34755;
+}
+#rw-checkout .left .body .options a:hover {
+		background-color: #F34755;
+}
+#rw-checkout .invoice-content ul.header li span {
+		color: #F34755;
+}
+#rw-checkout .colorize,
+#rw-checkout .invoice-content ul li span.colorize,
+#rw-checkout .invoice-content ul li span.colorize a {
+		color: #F34755;
+}
+#rw-checkout .colorize-secondary,
+#rw-checkout .invoice-content ul li span.colorize-secondary {
+		color: #556270;
+}
+#rw-checkout .button:hover {
+		background-color: #F34755;
+}
+#rw-checkout .timer > .percent {
+		color: #F34755;
+}
+#rw-checkout .timer > #slice > .pie {
+		border: 3px solid #F34755;
+}
+
+
+
+
