@@ -26,7 +26,7 @@ Route::get('/gallery', 'API\PicturesController@getAll')->name('gallery');
 Route::get('/gallery/manage', 'API\PicturesController@manage')->name('images.manage');
 Route::get('/gallery/delete/{filename}', 'API\PicturesController@delete')->name('images.delete');
 Route::get('/images/{filename}', 'API\PicturesController@images')->name('images');
-Route::get('/images/{userID}/{filename}', 'API\PicturesController@imagesPublic')->where('id', '[0-9]+')->name('images.public');
+Route::get('/images/{userID}/{filename}', 'API\PicturesController@imagesPublic')->where('userID', '[0-9]+')->name('images.public');
 
 Route::get('/admin/notifications', 'NotificationsController@show')->name('notifications');
 Route::get('/admin/notifications/get', 'NotificationsController@getRegistrationIDs')->name('notifications.test');
@@ -46,3 +46,11 @@ Route::get('/roles/show', 'API\AuthController@getRoles')->name('roles.get');
 Route::get('/testing', 'API\AuthController@setPassword')->name('testing');
 Route::get('/about', 'AboutController@show')->name('about');
 Route::get('/terms', 'TermsController@show')->name('terms');
+
+Route::group(['prefix' => 'home'], function() {
+    Route::get('/statistics', 'StatisticsController@show')->name('statistics');
+    Route::get('/application', 'ApplicationController@show')->name('mobileapp');
+    Route::get('/pictures', 'PicturesController@show')->name('pictures');
+    Route::get('/messages', 'MessagesController@show')->name('messages');
+    Route::get('/facebook', 'FacebookController@show')->name('facebook');
+});

@@ -412,9 +412,9 @@ $(document).ready(function() {
 	});*/
 
 	/* Send Commands */
-	$("body").on("click", ".socket-command-trigger", function(event){
+	/*$("body").on("click", ".socket-command-trigger", function(event){
 		socket.emit("send", $(this).data('command'));
-	});
+	});*/
 	/* end Test Socket */
 		
 });

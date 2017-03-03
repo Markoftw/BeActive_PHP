@@ -93,30 +93,30 @@
         <form class="form-signin" role="form" method="POST" action="{{ route('register') }}">
             {{ csrf_field() }}
             <div class="rw-form-signin-heading clearfix">
-                <h1 class="pull-left">Sign Up</h1>
-                <h4 class="pull-right"><a href="{{ url('/login') }}">Sign In</a></h4>
+                <h1 class="pull-left">Registracija</h1>
+                <h4 class="pull-right"><a href="{{ url('/login') }}">Prijava</a></h4>
             </div>
             <div class="form-group">
-                <label class="control-label" for="name">Username</label>
-                <input type="text" name="name" class="form-control rw-input" id="name" placeholder="Enter username"
+                <label class="control-label" for="name">Uporabniško ime</label>
+                <input type="text" name="name" class="form-control rw-input" id="name" placeholder="Janez"
                        required>
                 <span class="help-block error">Required field</span>
             </div>
             <div class="form-group">
-                <label class="control-label" for="email">Email address</label>
-                <input type="email" name="email" class="form-control rw-input" id="email" placeholder="Enter email"
+                <label class="control-label" for="email">E-poštni naslov</label>
+                <input type="email" name="email" class="form-control rw-input" id="email" placeholder="primer@gmail.com"
                        required>
                 <span class="help-block error">Required field</span>
             </div>
             <div class="form-group">
                 <!-- See http://getbootstrap.com/css/#forms-control-validation for Validation states -->
                 <!-- Adding has-error will also display help-block down bellow -->
-                <label class="control-label" for="password">Password</label>
+                <label class="control-label" for="password">Geslo</label>
                 <input id="password" type="password" name="password" class="form-control rw-input" required>
                 <span class="help-block error">Required field</span>
             </div>
             <div class="form-group">
-                <label class="control-label" for="password">Repeat password</label>
+                <label class="control-label" for="password">Ponovno geslo</label>
                 <input id="password-confirm" type="password" name="password_confirmation" class="form-control rw-input"
                        required>
                 <span class="help-block error">Required field</span>
@@ -134,7 +134,7 @@
                 </select>
             </div>-->
             <div class="clearfix"></div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Registracija</button>
             <!-- Use this in production: <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
         </form>
 

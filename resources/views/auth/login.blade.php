@@ -82,18 +82,18 @@
         <form class="form-signin" role="form" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
             <div class="rw-form-signin-heading clearfix">
-                <h1 class="pull-left">Sign In</h1>
-                <h4 class="pull-right"><a href="{{ url('/register') }}">Sign Up</a></h4>
+                <h1 class="pull-left">Prijava</h1>
+                <h4 class="pull-right"><a href="{{ url('/register') }}">Registracija</a></h4>
             </div>
-            <input type="email" name="email" class="form-control rw-input email" placeholder="Email address" required>
+            <input type="email" name="email" class="form-control rw-input email" placeholder="E-poštni naslov" required>
             <!-- Note: different classes than user pages -->
-            <input type="password" name="password" class="form-control rw-input password" placeholder="Password"
+            <input type="password" name="password" class="form-control rw-input password" placeholder="Geslo"
                    required><!-- Note: different classes than user pages -->
             <div class="clearfix"></div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Prijava</button>
             <!-- Use this in production: <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
             <div class="clearfix"></div>
-            <div class="extra"><a href="{{ route('password.request') }}">Forgot Password?</a></div>
+            <div class="extra"><a href="{{ route('password.request') }}">Pozabljeno geslo?</a></div>
         </form>
 
     </div>

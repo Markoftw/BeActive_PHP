@@ -38,7 +38,7 @@
 
                         <!-- Dashboard Menu -->
                         <ul class="nav nav-stacked rw-front card active">
-                            <li class="active">
+                            <li>
                                 <a href="{{ url('/home') }}"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
                             </li>
                             <li>
@@ -53,7 +53,7 @@
                             <li>
                                 <a href="{{ url('/home/messages') }}"><span class="glyphicon glyphicon-envelope"></span>Sporočila</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="{{ url('/home/facebook') }}"><span class="glyphicon glyphicon-folder-open"></span>FB Objave</a>
                             </li>
                             <li>
@@ -141,7 +141,7 @@
             <!-- Main Header -->
             <div class="navbar rw-navbar-static-top" role="complementary">
                 <div class="navbar-text visible-lg">Tesla Motors d.o.o.</div><!-- end .nav-text -->
-                <div class="navbar-header"><span class="navbar-brand" id="title">Dashboard</span></div><!-- end .nav-header -->
+                <div class="navbar-header"><span class="navbar-brand" id="title">Facebook objave</span></div><!-- end .nav-header -->
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="status on" id="socket-status"><span></span>Online</li>
@@ -160,7 +160,7 @@
             <!-- end Main Header -->
 
             <!-- Main Container -->
-            <<div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
+            <div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
 
 
                 <!-- Dashboard Container -->
@@ -170,18 +170,12 @@
                         <div class="col-md-4">
                             <ul class="dashboard-list">
                                 <li>
-                                    <span class="title">Welcome back</span>
-                                    <span class="value">Elon Musk</span>
-                                </li>
-                                <li>
-                                    <span class="title">Your Balance is</span>
-                                    <span class="value">1,000,000.00 <span>USD</span></span>
-                                    <span class="value-small">&#8776; 893.03 EUR</span>
+                                    <span class="title">Facebook</span>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-lg btn-primary ajax">Withdraw</a>
+                            <!--<a href="#" class="btn btn-lg btn-primary ajax">Withdraw</a>-->
                         </div>
-                        <div class="col-md-4">
+                        <!--<div class="col-md-4">
                             <ul class="dashboard-list">
                                 <li>
                                     <span class="title">Account ID</span>
@@ -215,10 +209,10 @@
                                 </ul>
                             </div>
                             <a href="#" class="btn btn-lg btn-primary ajax">Payments</a>
-                        </div>
+                        </div>-->
                     </div>
 
-                    <header class="clearfix">
+                    <!--<header class="clearfix">
                         <h1>Payments Chart <span class="small">Last week</span></h1>
 
                         <div class="right clearfix"><a href="#" class="btn btn-link ajax">Go to statistics</a></div>
@@ -227,14 +221,14 @@
                     <div class="chart-container">
                         <div class="loading">Loading chart...</div>
                         <div id="chart-dashboard" class="chart"></div>
-                    </div>
+                    </div>-->
 
                 </div>
                 <!-- end Dashboard Container -->
 
 
                 <!-- Right -->
-                <div class="dashboard-messages">
+                <!--<div class="dashboard-messages">
 
                     <ul class="rw-messages">
                         <li class="magenta">
@@ -293,7 +287,7 @@
                         <h3>Nothing more to show</h3>
                         <span class="dot"></span>
                     </div>
-                </div>
+                </div>-->
                 <!-- end Right -->
 
 
@@ -313,201 +307,15 @@
                 end Feature Dashboard -->
 
                 <!-- Scripts -->
-                <script type="text/javascript" charset="utf-8" src="js/jquery-2.1.0.min.js"></script>
-                <script type="text/javascript" charset="utf-8" src="js/highstock.js"></script>
-                <script type="text/javascript" charset="utf-8" src="js/bootstrap.min.js"></script>
-                <script type="text/javascript" charset="utf-8" src="js/jquery.history.js"></script>
+                <script type="text/javascript" charset="utf-8" src="../js/jquery-2.1.0.min.js"></script>
+                <script type="text/javascript" charset="utf-8" src="../js/highstock.js"></script>
+                <script type="text/javascript" charset="utf-8" src="../js/bootstrap.min.js"></script>
+                <script type="text/javascript" charset="utf-8" src="../js/jquery.history.js"></script>
                 <!--<script type="text/javascript" charset="utf-8" src="js/socket.io.min.js"></script>-->
-                <script type="text/javascript" charset="utf-8" src="js/jQueryRotate.2.2.js"></script>
+                <script type="text/javascript" charset="utf-8" src="../js/jQueryRotate.2.2.js"></script>
                 <!--<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>-->
-                <script type="text/javascript" charset="utf-8" src="js/rw_alpha.js"></script>
+                <script type="text/javascript" charset="utf-8" src="../js/rw_alpha.js"></script>
                 <!--<script type="text/javascript" charset="utf-8" src="js/app.js"></script>-->
-
-                <script type="text/javascript">
-                    $(document).ready(function() {
-
-                        /* Payments Circle */
-                        $('#payments-circle').highcharts({
-                            chart: {
-                                plotBackgroundColor: null,
-                                plotBorderWidth: null,
-                                borderWidth: 0,
-                                plotShadow: false,
-                                backgroundColor:'rgba(255, 255, 255, 0)',
-                                margin: 0,
-                            },
-                            title: {
-                                text: false
-                            },
-                            plotOptions: {
-                                pie: {
-                                    allowPointSelect: false,
-                                    dataLabels: false,
-                                    showInLegend: false,
-                                    borderWidth: 0,
-                                    center: [45, 45],
-                                    startAngle: 0,
-                                    enableMouseTracking: false
-                                }
-                            },
-                            credits: {
-                                enabled: false
-                            },
-                            colors: ['#30D0F0','#E94E77','#9AC635','#678091'],
-                            series: [{
-                                type: 'pie',
-                                name: false,
-                                size: 110,
-                                innerSize: 100,
-                                data: [
-                                    ['Completed', 50],
-                                    ['Canceled', 25],
-                                    ['Active', 25]
-                                ]
-                            }]
-
-                        });
-                        /* end Payments Circle */
-
-
-                        /* Payments Chart */
-                        chart_dashboard = new Highcharts.Chart({
-                            chart: {
-                                renderTo: 'chart-dashboard',
-                                type: 'column',
-                                backgroundColor: '#F7F6F2',
-                                plotBackgroundColor: '#F7F6F2',
-                                plotBorderWidth: 0,
-                                panning: false,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                spacingBottom: 30,
-                                spacingTop: 0,
-                                style: {
-                                    fontFamily: '"Open Sans", sans-serif;', // default font
-                                }
-                            },
-                            title: false,
-                            xAxis: {
-                                lineWidth: 0,
-                                tickLength: 0,
-                                labels: {
-                                    y: 40,
-                                    style: {
-                                        color: '#999',
-                                        fontSize: '13px',
-                                    }
-                                },
-                                categories: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SUN', 'SAT']
-                            },
-                            yAxis : [{ // Primary yAxis
-
-                                title: false,
-                                tickLength: 10,
-                                tickWidth: 0,
-                                tickColor: '#AE53C0',
-                                lineWidth: 0,
-                                gridLineWidth: 1,
-                                gridLineColor: '#dbdbdb',
-                                labels: {
-                                    align: 'right',
-                                    x: 0,
-                                    y: -10,
-                                    style: {
-                                        color: '#999',
-                                    }
-                                },
-                                opposite : true
-
-                            }, { // Secondary yAxis
-
-                                title: false,
-                                tickWidth: 0,
-                                lineWidth: 0,
-                                gridLineWidth: 0,
-                                labels: {
-                                    align: 'left',
-                                    x: 0,
-                                    y: -10,
-                                    style: {
-                                        color: '#999',
-                                    }
-                                },
-                                opposite : false
-
-                            }],
-                            legend: {
-                                enabled: false
-                            },
-                            credits: {
-                                enabled: false
-                            },
-                            tooltip: {
-                                borderRadius: 0,
-                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                                style: {
-                                    color: '#fff',
-                                },
-                                borderWidth: 0,
-                                shadow: false,
-                                formatter: function() {
-                                    return '<b>'+ this.x +'</b><br/>'+
-                                        this.series.name +': '+ this.y +'<br/>'
-                                }
-                            },
-                            plotOptions: {
-                                column: {
-                                    /*pointWidth: 30,*/
-                                    stacking: 'normal',
-                                    pointPadding: 0,
-                                    groupPadding: .4,
-                                    borderWidth: 0,
-                                },
-                                line: {
-                                    marker: {
-                                        lineColor: '#678091',
-                                        fillColor: '#ffffff',
-                                        lineWidth: 2,
-                                        radius: 6,
-                                        states: {
-                                            hover: {
-                                                lineColor: '#678091',
-                                                fillColor: '#ffffff',
-                                                lineWidth: 3,
-                                                radius: 6,
-                                            }
-                                        }
-                                    },
-                                }
-                            },
-                            colors: ['#30D0F0','#E94E77','#9AC635','#678091'],
-                            series: [{
-                                name: 'Completed',
-                                yAxis : 1,
-                                data: [5, 3, 4, 7, 2, 4, 6]
-                            }, {
-                                name: 'Canceled',
-                                yAxis : 1,
-                                data: [2, 2, 3, 2, 1, 4, 7]
-                            }, {
-                                name: 'Active',
-                                yAxis : 1,
-                                data: [0, 0, 0, 0, 0, 0, 3]
-                            }, {
-                                name: 'USD Amount Completed',
-                                yAxis : 0,
-                                type: 'line',
-                                data: [20000, 30000, 15000, 30000, 25000, 10000, 30000]
-                            }]
-                        });
-                        /* end Payments Chart */
-
-
-                    });
-                </script>
-
-
-
 
             </div>
             <!-- end RW Container -->

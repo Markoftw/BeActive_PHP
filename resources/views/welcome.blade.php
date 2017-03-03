@@ -12,7 +12,9 @@
     <link rel="shortcut icon" href="ico/favicon.ico">
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <!--<link href="/css/app.css" rel="stylesheet">-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/rw-theme.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,10 +60,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url('/about') }}">About</a></li><!-- Active item has class .active on li element -->
+                    <li><a href="{{ url('/about') }}">O nas</a></li><!-- Active item has class .active on li element -->
                     <li><a href="{{ url('/terms') }}">Terms</a></li>
-                    <li><a href="{{ url('/login') }}">Sign In</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li><a href="{{ url('/login') }}">Prijava</a></li>
+                    <li><a href="{{ url('/register') }}">Registracija</a></li>
                 </ul>
             </div><!-- end .navbar-collapse -->
         </div>
@@ -69,7 +71,7 @@
     <!-- end Navigation -->
     <!-- Cover -->
     <div class="rw-home-cover">
-        <h1>Advertise <br><span>via</span></h1>
+        <h1>Oglaševanje <br><span>via</span></h1>
         <ul class="rw-buttons">
             <li class="left">
                 <span class="icon"></span>
@@ -173,7 +175,7 @@
 <script type="text/javascript" charset="utf-8" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/jquery.history.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/jQueryRotate.2.2.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>
+<!--<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>-->
 <script type="text/javascript" charset="utf-8" src="js/rw_alpha.js"></script>
 
 
