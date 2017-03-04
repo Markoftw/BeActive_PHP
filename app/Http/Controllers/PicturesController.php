@@ -8,6 +8,20 @@ class PicturesController extends Controller
 {
     public function show()
     {
-        return view('pictures');
+        $images = auth()->user()->uploads()->get();
+        if($images) {
+            return view('pictures')->with(['images' => $images]);
+        }
+        return abort(404);
+    }
+
+    public function upload()
+    {
+
+    }
+
+    public function create()
+    {
+
     }
 }

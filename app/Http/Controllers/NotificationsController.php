@@ -131,4 +131,8 @@ class NotificationsController extends Controller
         }
         return $device_array;
     }
+
+    private function clearDuplicates() {
+
+    }
 }

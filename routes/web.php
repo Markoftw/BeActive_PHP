@@ -51,6 +51,8 @@ Route::group(['prefix' => 'home'], function() {
     Route::get('/statistics', 'StatisticsController@show')->name('statistics');
     Route::get('/application', 'ApplicationController@show')->name('mobileapp');
     Route::get('/pictures', 'PicturesController@show')->name('pictures');
+    Route::get('/pictures/upload', 'PicturesController@upload')->name('pictures.upload');
+    Route::post('/pictures/upload', 'PicturesController@create')->name('pictures.upload.post');
     Route::get('/messages', 'MessagesController@show')->name('messages');
     Route::get('/facebook', 'FacebookController@show')->name('facebook');
 });

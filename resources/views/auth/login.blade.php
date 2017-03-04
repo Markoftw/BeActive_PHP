@@ -86,9 +86,19 @@
                 <h4 class="pull-right"><a href="{{ url('/register') }}">Registracija</a></h4>
             </div>
             <input type="email" name="email" class="form-control rw-input email" placeholder="E-poštni naslov" required>
+            @if ($errors->has('email'))
+                <span class="help-block">
+                    <strong style="color: white;">{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
             <!-- Note: different classes than user pages -->
             <input type="password" name="password" class="form-control rw-input password" placeholder="Geslo"
                    required><!-- Note: different classes than user pages -->
+            @if ($errors->has('password'))
+                <span class="help-block">
+                    <strong style="color: white;">{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
             <div class="clearfix"></div>
             <button type="submit" class="btn btn-lg btn-primary btn-block">Prijava</button>
             <!-- Use this in production: <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->

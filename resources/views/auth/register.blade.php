@@ -102,12 +102,22 @@
                        required>
                 <span class="help-block error">Required field</span>
             </div>
+            @if ($errors->has('name'))
+                <span class="help-block">
+                    <strong style="color: white;">{{ $errors->first('name') }}</strong>
+                </span>
+            @endif
             <div class="form-group">
                 <label class="control-label" for="email">E-poštni naslov</label>
                 <input type="email" name="email" class="form-control rw-input" id="email" placeholder="primer@gmail.com"
                        required>
                 <span class="help-block error">Required field</span>
             </div>
+            @if ($errors->has('email'))
+                <span class="help-block">
+                    <strong style="color: white;">{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
             <div class="form-group">
                 <!-- See http://getbootstrap.com/css/#forms-control-validation for Validation states -->
                 <!-- Adding has-error will also display help-block down bellow -->
@@ -115,6 +125,11 @@
                 <input id="password" type="password" name="password" class="form-control rw-input" required>
                 <span class="help-block error">Required field</span>
             </div>
+            @if ($errors->has('password'))
+                <span class="help-block">
+                    <strong style="color: white;">{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
             <div class="form-group">
                 <label class="control-label" for="password">Ponovno geslo</label>
                 <input id="password-confirm" type="password" name="password_confirmation" class="form-control rw-input"
