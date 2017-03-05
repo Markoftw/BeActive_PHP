@@ -89,7 +89,7 @@ class ReviewController extends Controller
         return abort(404);
     }
 
-    function generateRandomString($length = 30) {
+    private function generateRandomString($length = 30) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';

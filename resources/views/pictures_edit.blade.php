@@ -184,50 +184,38 @@
 
             <!-- Main Container -->
             <div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
-
                 <header>
                     <div>
-                        <h1>Naložene slike</h1>
+                        <h1>Naloži novo sliko</h1>
                     </div>
                     <div class="buttons pull-right">
                         <h1><a class="icon" title="Naloži" href="{{ route('pictures.upload') }}"><span class="glyphicon glyphicon-upload"></span></a></h1>
                         <!--<a class="icon" title="Search"><span class="glyphicon glyphicon-save"></span></a>-->
                     </div>
                 </header>
-                @if(count($images))
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Datum nalaganja</th>
-                            <th>Opis</th>
-                            <th>Datoteka</th>
-                            <th>Povezave</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($images as $image)
-                            <tr>
-                                <td>
-                                    {{ $image->created_at }}
-                                </td>
-                                <td>
-                                    {{ $image->opis }}
-                                </td>
-                                <td>
-                                    {{ $image->name }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('images', $image->name) }}" target="_blank">Ogled</a>
-                                    <a href="{{ route('pictures.edit', $image->id) }}">Uredi</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                <br/>
+                <br/>
+                <br/>
+                <form name="povprasevanje" method="POST" action="{{ route('pictures.edit.post', $upload->id) }}" role="form">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="name">Opis slike</label>
+                                <input type="text" class="input" id="opis" name="opis" placeholder="Pica s/z ..." required value="{{ $upload->opis }}"/>
+                                @if ($errors->has('opis'))
+                                    <span class="help-block"><strong>{{ $errors->first('opis') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-buttons">
+                        <div class="col-md-6">
+                            <button class="btn btn-lg btn-primary">Shrani</button>
+                        </div>
+                    </div>
+                </form>
 
-                @else
-                    Brez naloženih slik! Naložite slike s klikom na "Naloži" ali z mobilno aplikacijo.
-            @endif
             </div>
         </div>
     </div>
