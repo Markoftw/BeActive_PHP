@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@show')->name('welcome');
+Route::post('/', 'WelcomeController@storeInterest')->name('welcome.post');
 
 Auth::routes();
 

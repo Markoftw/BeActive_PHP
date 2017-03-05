@@ -36,13 +36,13 @@
 <body class='rw-home'><!-- Mind class names -->
 
 <!-- Alpha -->
-<div class="log_widget" id="log">
+<!--<div class="log_widget" id="log">
 
     <h1>Log</h1>
     <div class="data" id="alpha_clients" style="margin-bottom: 20px;"></div>
     <div class="data" id="alpha_data"></div>
 
-</div>
+</div>-->
 <!-- end Alpha -->
 
 <!-- Home Header -->
@@ -136,12 +136,57 @@
     <!-- Feature Signup -->
     <div class="rw-feature-signup">
         <div class="container">
-            <div class="col-md-6">
+            <!--<div class="col-md-6">
                 <h2>Don't take our word for it</h2>
             </div>
             <div class="col-md-4 col-md-offset-2">
                 <a href="{{ url('/register') }}" class="btn btn-lg btn-primary btn-block">Try it for Free!</a>
-            </div>
+            </div>-->
+                <form name="povprasevanje" method="POST" action="{{ route('welcome.post') }}" role="form">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="name">Podjetje / Ime</label>
+                                <input type="text" class="input" id="name" name="name" placeholder="Tesla motors d.o.o." required/>
+                                @if ($errors->has('name'))
+                                    <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="email">E-poštni naslov</label>
+                                <input type="email" class="input" id="email" name="email" placeholder="primer@gmail.com" required/>
+                                @if ($errors->has('email'))
+                                    <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" for="tel">Kontaktna tel. št.</label>
+                                <input type="number" class="input" id="tel" name="phone" required placeholder="041800800">
+                                @if ($errors->has('phone'))
+                                    <span class="help-block"><strong>{{ $errors->first('phone') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="message">Sporočilo (Neobvezno)</label>
+                                <textarea class="textarea" rows="3" id="message" name="message"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-buttons">
+                        <div class="col-md-12">
+                            <button class="btn btn-lg btn-primary">Oddaj povpraševanje</button>
+                        </div>
+                    </div>
+                </form>
         </div>
     </div>
     <!-- end Feature Signup -->
