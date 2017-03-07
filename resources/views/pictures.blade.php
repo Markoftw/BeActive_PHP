@@ -193,7 +193,7 @@
                         <h1><a class="icon" title="Naloži" href="{{ route('pictures.upload') }}"><span class="glyphicon glyphicon-upload"></span></a></h1>
                         <!--<a class="icon" title="Search"><span class="glyphicon glyphicon-save"></span></a>-->
                     </div>
-                </header>
+                </header><hr/>
                 @if(count($images))
                     <table class="table table-hover">
                         <thead>
@@ -226,7 +226,7 @@
                     </table>
 
                 @else
-                    Brez naloženih slik! Naložite slike s klikom na "Naloži" ali z mobilno aplikacijo.
+                    Brez naloženih slik! Naloži slike s klikom na "Naloži" ali preko mobilno aplikacijo.
             @endif
             </div>
         </div>

@@ -212,7 +212,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label" for="photo">Izberite sliko</label>
+                                <label class="control-label" for="photo">Izberi sliko</label>
                                 <input id="photo" type="file" name="photo" class="form-control" data-show-preview="false" required>
                                 @if ($errors->has('photo'))
                                     <span class="help-block"><strong>{{ $errors->first('photo') }}</strong></span>

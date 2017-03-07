@@ -186,7 +186,7 @@
             <div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
                 <header>
                     <div>
-                        <h1>Naloži novo sliko</h1>
+                        <h1>Uredi opis</h1>
                     </div>
                     <div class="buttons pull-right">
                         <h1><a class="icon" title="Naloži" href="{{ route('pictures.upload') }}"><span class="glyphicon glyphicon-upload"></span></a></h1>

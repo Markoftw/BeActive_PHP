@@ -168,13 +168,13 @@
                 <div class="row">
                     <div class="col-md-8">
                         Mobilna aplikacija {{ config('app.name', 'Laravel') }} je še v fazi <b>BETA</b> (verzije <b>0.2.0</b>, posodobljeno dne 5.3.2017) <br/><br/><br/>
-                        <a href="{{ url('/apk/download/app-release_0.2.0.apk') }}" class="btn btn-lg btn-primary ajax" style="width: 410px">Prenos aplikacje</a><br/><br/><br/>
+                        <a href="{{ url('/apk/download/app-release_0.2.0.apk') }}" class="btn btn-lg btn-primary ajax" style="width: 410px">Prenos aplikacje</a>
+                        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/badge_new.png"/></a><br/><br/><br/>
                         Ste opazili napake v aplikaciji? Prijavite jih lahko <a href="#">tukaj</a>.
                     </div>
                     <div class="col-md-4">
                         Prenos aplikacije z QR kodo (Barcode Scanner) <br/><br/>
                         <img src="http://i.imgur.com/8ElIk1z.png"/><br/><br/><br/>
-                        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/badge_new.png"/></a>
                     </div>
                 </div>
             </div>
