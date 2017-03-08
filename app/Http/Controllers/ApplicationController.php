@@ -13,7 +13,7 @@ class ApplicationController extends Controller
 
     public function show()
     {
-        return view('mobile_application');
+        return view('home.mobile_application');
     }
 
     public function report()

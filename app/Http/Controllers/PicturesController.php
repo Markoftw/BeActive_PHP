@@ -17,7 +17,7 @@ class PicturesController extends Controller
     {
         $images = auth()->user()->uploads()->get();
         if($images) {
-            return view('pictures')->with(['images' => $images]);
+            return view('home.pictures')->with(['images' => $images]);
         }
         return abort(404);
     }
@@ -73,7 +73,7 @@ class PicturesController extends Controller
         $upload = Upload::find($id);
 
         if(count($upload)) {
-            return view('pictures_edit')->with('upload', $upload);
+            return view('home.pictures_edit')->with('upload', $upload);
         }
 
         return abort(404);
@@ -90,7 +90,7 @@ class PicturesController extends Controller
 
         $images = auth()->user()->uploads()->get();
         if($images) {
-            return view('pictures')->with(['images' => $images]);
+            return view('home.pictures')->with(['images' => $images]);
         }
     }
 }

@@ -13,6 +13,6 @@ class StatisticsController extends Controller
 
     public function show()
     {
-        return view('statistics');
+        return view('home.statistics');
     }
 }

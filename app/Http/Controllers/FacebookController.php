@@ -18,7 +18,7 @@ class FacebookController extends Controller
         $reviews_done = Review::with('user')->where('user_id', auth()->user()->id)->where('review', '!=' , 'waiting')->orderBy('updated_at', 'desc')->take(10)->get();
 
         //if(count($reviews)) {
-        return view('facebook')->with('reviews', $reviews)->with('reviews_done', $reviews_done);
+        return view('home.facebook')->with('reviews', $reviews)->with('reviews_done', $reviews_done);
         //}
         //return ['success' => true, 'status' => 'none'];
     }

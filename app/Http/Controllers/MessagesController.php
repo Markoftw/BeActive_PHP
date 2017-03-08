@@ -13,6 +13,6 @@ class MessagesController extends Controller
 
     public function show()
     {
-        return view('messages');
+        return view('home.messages');
     }
 }
