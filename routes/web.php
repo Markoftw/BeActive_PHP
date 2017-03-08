@@ -57,5 +57,9 @@ Route::group(['prefix' => 'home'], function() {
     Route::get('/pictures/edit/{id}', 'PicturesController@edit')->name('pictures.edit');
     Route::post('/pictures/edit/{id}', 'PicturesController@postEdit')->name('pictures.edit.post');
     Route::get('/messages', 'MessagesController@show')->name('messages');
+    Route::get('/messages/new', 'MessagesController@create')->name('messages.new');
+    Route::post('/messages/new', 'MessagesController@postCreate')->name('messages.new.post');
+    Route::get('/messages/{id}', 'MessagesController@showOne')->name('messages.one');
+    Route::post('/messages/{id}', 'MessagesController@postOne')->name('messages.one.post');
     Route::get('/facebook', 'FacebookController@show')->name('facebook');
 });

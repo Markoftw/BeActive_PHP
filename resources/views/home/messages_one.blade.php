@@ -44,13 +44,13 @@
                             <li>
                                 <a href="{{ url('/home/statistics') }}"><span class="glyphicon glyphicon-signal"></span>Statistika</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="{{ url('/home/application') }}"><span class="glyphicon glyphicon-phone"></span>Mobilna aplikacija</a>
                             </li>
                             <li>
                                 <a href="{{ url('/home/pictures') }}"><span class="glyphicon glyphicon-picture"></span>Slike</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="{{ url('/home/messages') }}"><span class="glyphicon glyphicon-envelope"></span>Sporočila</a>
                             </li>
                             <li>
@@ -141,7 +141,7 @@
             <!-- Main Header -->
             <div class="navbar rw-navbar-static-top" role="complementary">
                 <div class="navbar-text visible-lg">Tesla Motors d.o.o.</div><!-- end .nav-text -->
-                <div class="navbar-header"><span class="navbar-brand" id="title">Mobilna aplikacija</span></div><!-- end .nav-header -->
+                <div class="navbar-header"><span class="navbar-brand" id="title">Sporočila</span></div><!-- end .nav-header -->
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="status on" id="socket-status"><span></span>Online</li>
@@ -162,28 +162,110 @@
             <!-- Main Container -->
             <div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
                 <header>
-                    <h1>Prenos mobilne aplikacije</h1>
-                </header>
-                <hr/>
-                <div class="row">
-                    <div class="col-md-8">
-                        Mobilna aplikacija {{ config('app.name', 'Laravel') }} je še v fazi <b>BETA</b> (verzije <b>0.2.0</b>, posodobljeno dne 5.3.2017) <br/><br/><br/>
-                        <a href="{{ url('/apk/download/app-release_0.2.0.apk') }}" class="btn btn-lg btn-primary ajax" style="width: 410px">Prenos aplikacje</a>
-                        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/badge_new.png"/></a><br/><br/><br/>
-                        Ste opazili napake v aplikaciji? Prijavite jih lahko <a href="{{ route('messages') }}">tukaj</a>.
+                    <div>
+                        <h1>Sporočila</h1>
                     </div>
-                    <div class="col-md-4">
-                        Prenos aplikacije z QR kodo (Barcode Scanner) <br/><br/>
-                        <img src="http://i.imgur.com/8ElIk1z.png"/><br/><br/><br/>
+                    <div class="buttons pull-right">
+                        <h1><a class="icon" title="Novo" href="{{ route('messages.new') }}"><span class="glyphicon glyphicon-plus"></span></a></h1>
                     </div>
-                </div>
+                </header><hr/>
+                @if(count($ticket))
+                    <div class="messages default clearfix">
+                        <ul class="rw-messages">
+                            <li class="{{ $ticket[0]['status'] == 'Zaprto' ? 'blue' : 'green' }} active">
+                                <a href="{{ route('messages.one', $ticket[0]['ticket_group']) }}">
+                                    <span class="dot"><span></span></span>
+                                    <div class="body">
+                                        <span class="title">{{ $ticket[0]['title'] }}</span>
+                                        <span class="value">{{ $ticket[0]['naslov'] }}</span>
+                                    </div>
+                                    <span class="time ago" data-timer="0" title="Wed Feb 19 2014 04:30:30 GMT+0100 (Central Europe Standard Time)">{{ $ticket[0]['created_at'] }}</span>
+                                </a>
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table rw-table table-hover">
+                                                <tr>
+                                                    <td>Status:</td>
+                                                    <td class="colorize">{{ $ticket[0]['status'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Naslov:</td>
+                                                    <td>{{ $ticket[0]['naslov'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ID:</td>
+                                                    <td>{{ $ticket[0]['ticket_group'] }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table class="table rw-table table-hover">
+                                                <tr>
+                                                    <td>Odprto:</td>
+                                                    <td>{{ $ticket[0]['created_at'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Zadnja sprememba:</td>
+                                                    <td>{{ $ticket[0]['updated_at'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Zaprto:</td>
+                                                    <td>{{ (!is_null($ticket[0]['closed_at'])) ? $ticket[0]['closed_at'] : '-' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Agent:</td>
+                                                    <td>{{ $agent }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    @foreach($ticket as $comment)
+                                        <div class="support-message">
+                                            <h3>{{ $comment->user->name }}</h3>
+                                            <span class="time ago" data-timer="0" title="Wed Feb 19 2014 04:30:30 GMT+0100 (Central Europe Standard Time)">{{ $comment->created_at }}</span>
+                                            <div class="text">
+                                                {!! nl2br($comment->message) !!}
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    <hr/>
+                                    <div>
+                                        <form class="inline-support-form" method="POST" action="{{ route('messages.one.post', $ticket[0]['ticket_group']) }}">
+                                            {{ csrf_field() }}
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="sporocilo">Sporočilo</label>
+                                                        <textarea class="textarea" rows="3" id="sporocilo" name="sporocilo" required></textarea>
+                                                    </div>
+                                                </div>
+                                                @if ($errors->has('sporocilo'))
+                                                    <span class="help-block"><strong>{{ $errors->first('sporocilo') }}</strong></span>
+                                                @endif
+                                            </div>
+                                            <div class="row form-buttons">
+                                                <div class="col-md-6">
+                                                    <button type="submit" class="btn btn-lg btn-primary">Potrdi</button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a href="{{ route('messages') }}" class="btn btn-lg btn-default">Prekliči</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    Error.
+                @endif
             </div>
-        </div>
             <!-- end RW Container -->
         </div>
         <!-- end Right Panel - Main Content -->
     </div><!-- end Main Container -->
-
     <!-- Scripts -->
     <script type="text/javascript" charset="utf-8" src="../js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/highstock.js"></script>
@@ -194,6 +276,5 @@
     <!--<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>-->
     <script type="text/javascript" charset="utf-8" src="../js/rw_alpha.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/app.js"></script>-->
-
     </body>
 @endsection

@@ -28,6 +28,11 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token', 'guest_password'
     ];
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
     /**
      * Show all User roles
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

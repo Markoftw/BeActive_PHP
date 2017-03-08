@@ -44,13 +44,13 @@
                             <li>
                                 <a href="{{ url('/home/statistics') }}"><span class="glyphicon glyphicon-signal"></span>Statistika</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="{{ url('/home/application') }}"><span class="glyphicon glyphicon-phone"></span>Mobilna aplikacija</a>
                             </li>
                             <li>
                                 <a href="{{ url('/home/pictures') }}"><span class="glyphicon glyphicon-picture"></span>Slike</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="{{ url('/home/messages') }}"><span class="glyphicon glyphicon-envelope"></span>Sporočila</a>
                             </li>
                             <li>
@@ -141,7 +141,7 @@
             <!-- Main Header -->
             <div class="navbar rw-navbar-static-top" role="complementary">
                 <div class="navbar-text visible-lg">Tesla Motors d.o.o.</div><!-- end .nav-text -->
-                <div class="navbar-header"><span class="navbar-brand" id="title">Mobilna aplikacija</span></div><!-- end .nav-header -->
+                <div class="navbar-header"><span class="navbar-brand" id="title">Sporočila</span></div><!-- end .nav-header -->
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="status on" id="socket-status"><span></span>Online</li>
@@ -162,28 +162,63 @@
             <!-- Main Container -->
             <div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
                 <header>
-                    <h1>Prenos mobilne aplikacije</h1>
-                </header>
-                <hr/>
-                <div class="row">
-                    <div class="col-md-8">
-                        Mobilna aplikacija {{ config('app.name', 'Laravel') }} je še v fazi <b>BETA</b> (verzije <b>0.2.0</b>, posodobljeno dne 5.3.2017) <br/><br/><br/>
-                        <a href="{{ url('/apk/download/app-release_0.2.0.apk') }}" class="btn btn-lg btn-primary ajax" style="width: 410px">Prenos aplikacje</a>
-                        <a href="#"><img src="https://play.google.com/intl/en_us/badges/images/badge_new.png"/></a><br/><br/><br/>
-                        Ste opazili napake v aplikaciji? Prijavite jih lahko <a href="{{ route('messages') }}">tukaj</a>.
+                    <div>
+                        <h1>Ustvari novo sporočilo</h1>
                     </div>
-                    <div class="col-md-4">
-                        Prenos aplikacije z QR kodo (Barcode Scanner) <br/><br/>
-                        <img src="http://i.imgur.com/8ElIk1z.png"/><br/><br/><br/>
+                    <div class="buttons pull-right">
+                        <h1><a class="icon" title="Novo" href="{{ route('messages.new') }}"><span class="glyphicon glyphicon-plus"></span></a></h1>
                     </div>
-                </div>
+                </header><hr/>
+
+                <form name="povprasevanje" method="POST" action="{{ route('messages.new.post') }}" role="form">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group"><!-- Error input has class .has-error on this element - this colours field and display help-block -->
+                                <label class="control-label" for="tip">Tip sporočila</label>
+                                <select class="input" id="tip" name="tip">
+                                    <option value="Podpora">Podpora</option>
+                                    <option value="Mobilna aplikacija">Mobilna aplikacija</option>
+                                    <option value="Spletna stran">Spletna stran</option>
+                                    <option value="Drugo">Drugo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="naslov">Naslov</label>
+                                <input type="text" class="input" id="naslov" name="naslov" placeholder="..." required/>
+                                @if ($errors->has('naslov'))
+                                    <span class="help-block"><strong>{{ $errors->first('naslov') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="sporocilo">Sporočilo</label>
+                                <textarea class="textarea" rows="3" id="sporocilo" name="sporocilo"></textarea>
+                                @if ($errors->has('sporocilo'))
+                                    <span class="help-block"><strong>{{ $errors->first('sporocilo') }}</strong></span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-buttons">
+                        <div class="col-md-6">
+                            <button class="btn btn-lg btn-primary">Ustvari</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
-        </div>
             <!-- end RW Container -->
         </div>
         <!-- end Right Panel - Main Content -->
     </div><!-- end Main Container -->
-
     <!-- Scripts -->
     <script type="text/javascript" charset="utf-8" src="../js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/highstock.js"></script>
@@ -194,6 +229,5 @@
     <!--<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>-->
     <script type="text/javascript" charset="utf-8" src="../js/rw_alpha.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/app.js"></script>-->
-
     </body>
 @endsection
