@@ -62,4 +62,6 @@ Route::group(['prefix' => 'home'], function() {
     Route::get('/messages/{id}', 'MessagesController@showOne')->name('messages.one');
     Route::post('/messages/{id}', 'MessagesController@postOne')->name('messages.one.post');
     Route::get('/facebook', 'FacebookController@show')->name('facebook');
+    Route::get('/facebook/review/{id}', 'FacebookController@showOne')->name('facebook.review');
+    Route::post('/facebook/review/{id}', 'FacebookController@postOne')->name('facebook.review.post');
 });

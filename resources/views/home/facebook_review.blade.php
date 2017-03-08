@@ -163,77 +163,52 @@
 
                 <header>
                     <div>
-                        <h1>Čakajoče objave</h1>
+                        <h1>Podrobnosti čakajoče objave</h1>
                     </div>
                 </header><hr/>
-                @if(count($reviews))
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Datum nalaganja</th>
-                            <th>Naslovnica objave</th>
-                            <th>Povezave</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($reviews as $review)
-                            <tr>
-                                <td>
-                                    {{ $review->created_at }}
-                                </td>
-                                <td>
-                                    {{ $review->review_text }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('images.public', [$review->user->id, $review->picture_url]) }}">Ogled slike</a>
-                                    <a href="{{ route('facebook.review', $review->id) }}">Podrobnosti</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
-                @else
-                    Vse objave so potrjene ali zavrnjene.
-                @endif
-                <header>
-                    <div>
-                        <h1>Sprejete in zavrnjene objave (zadnjih 10)</h1>
+                @if(count($review))
+                    <div class="row">
+                        <div class="col-md-10">
+                            <b>Naslovnica objave</b>: {{ $review->review_text }} <br/><br/>
+                            <b>Slika</b> (klik na sliko za podrobnešji ogled): <br/><br/>
+                            <a href="{{ route('images', $review->picture_url) }}" target="_blank"><img src="{{ route('images', $review->picture_url) }}" alt="{{ $review->picture_url }}" width="608" height="500"></a><br/><br/>
+                            <form name="review" method="POST" action="{{ route('facebook.review.post', $review->id) }}" role="form">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="odlocitev" value="accept"/>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row form-buttons">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-lg btn-success">Sprejmi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form name="review" method="POST" action="{{ route('facebook.review.post', $review->id) }}" role="form">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="odlocitev" value="decline"/>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label" for="razlog">Razlog (Obvezno)</label>
+                                            <input type="text" class="input" id="razlog" name="razlog" placeholder="..." required/>
+                                            @if ($errors->has('razlog'))
+                                                <span class="help-block"><strong>{{ $errors->first('razlog') }}</strong></span>
+                                            @endif
+                                        </div>
+                                        <div class="row form-buttons">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-lg btn-danger">Zavrni</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </header><hr/>
-                @if(count($reviews_done))
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Datum odločitve</th>
-                            <th>Naslovnica objave</th>
-                            <th>Povezave</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($reviews_done as $review)
-                            <tr>
-                                <td>
-                                    {{ $review->updated_at }}
-                                </td>
-                                <td>
-                                    {{ $review->review_text }}
-                                </td>
-                                <td>
-                                    <a href="#">Ogled slike</a>
-                                    {!! ($review->review == 'Disapproved') ? '' : '<a href="#">Ogled objave</a>' !!}
-                                </td>
-                                <td>
-                                    {{ ($review->review == 'Disapproved') ? 'Zavrnjeno' : 'Sprejeto' }}
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
                 @else
-                    Brez sprejetih in zavrnjenih objav! Naložite slike in počakajte na odgovor. Med čakanjem, če vas kaj zanima nam lahko sporočite <a href="{{ route('messages') }}">tukaj</a>.
+                    Napaka.
                 @endif
             </div>
             <!-- end RW Container -->
@@ -244,14 +219,14 @@
     </div><!-- end Main Container -->
 
     <!-- Scripts -->
-    <script type="text/javascript" charset="utf-8" src="../js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/highstock.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/jquery.history.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/highstock.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/jquery.history.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/socket.io.min.js"></script>-->
-    <script type="text/javascript" charset="utf-8" src="../js/jQueryRotate.2.2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/jQueryRotate.2.2.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>-->
-    <script type="text/javascript" charset="utf-8" src="../js/rw_alpha.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/rw_alpha.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/app.js"></script>-->
 
     </body>

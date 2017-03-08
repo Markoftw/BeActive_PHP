@@ -220,14 +220,14 @@
         <!-- end Right Panel - Main Content -->
     </div><!-- end Main Container -->
     <!-- Scripts -->
-    <script type="text/javascript" charset="utf-8" src="../js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/highstock.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/jquery.history.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/highstock.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/jquery.history.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/socket.io.min.js"></script>-->
-    <script type="text/javascript" charset="utf-8" src="../js/jQueryRotate.2.2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/jQueryRotate.2.2.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>-->
-    <script type="text/javascript" charset="utf-8" src="../js/rw_alpha.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../js/rw_alpha.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/app.js"></script>-->
     </body>
 @endsection

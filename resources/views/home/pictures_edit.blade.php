@@ -201,7 +201,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label" for="name">Opis slike</label>
+                                <label class="control-label" for="opis">Opis slike</label>
                                 <input type="text" class="input" id="opis" name="opis" placeholder="Pica s/z ..." required value="{{ $upload->opis }}"/>
                                 @if ($errors->has('opis'))
                                     <span class="help-block"><strong>{{ $errors->first('opis') }}</strong></span>
@@ -222,14 +222,14 @@
     <!-- end RW Container -->
 
     <!-- Scripts -->
-    <script type="text/javascript" charset="utf-8" src="../js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/highstock.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/jquery.history.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/highstock.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/jquery.history.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/socket.io.min.js"></script>-->
-    <script type="text/javascript" charset="utf-8" src="../js/jQueryRotate.2.2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/jQueryRotate.2.2.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/rw.js"></script>-->
-    <script type="text/javascript" charset="utf-8" src="../js/rw_alpha.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../js/rw_alpha.js"></script>
     <!--<script type="text/javascript" charset="utf-8" src="js/app.js"></script>-->
 
     </body>
