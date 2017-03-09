@@ -66,9 +66,9 @@
                                 </form>
                             </li>
                             <li class="visible-xs"><!-- Small screen only -->
-                                <a href="#" class="no-ajax"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
+                                <a href="{{ route('settings') }}" class="no-ajax"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
                             </li>
-                            <li class="visible-xs">
+                            <!--<li class="visible-xs">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="no-ajax">
                                     <span class="glyphicon glyphicon-off"></span>Sign Out
                                 </a>
@@ -76,13 +76,13 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
-                            </li>
+                            </li>-->
                         </ul>
 
                         <!-- Settings Menu -->
                         <ul class="nav nav-stacked rw-back card">
                             <li data-active="user-settings"><!-- Active item has class .active on li element -->
-                                <a href="#"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
+                                <a href="{{ route('settings') }}"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
                                 <ul class="nav">
                                     <li data-activex="user-settings"><a href="#"><span class="dot"></span>Bank Account</a></li><!-- Active item has class .active on li element -->
                                     <li data-activex="user-settings-change-password"><a href="#"><span class="dot"></span>Change Password</a></li>
@@ -99,16 +99,7 @@
                                 </ul>
                             </li>
                             <li class="visible-xs"><!-- Small screen only -->
-                                <a href="{{ url('/home') }}" class="no-ajax"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
-                            </li>
-                            <li class="visible-xs">
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="no-ajax">
-                                    <span class="glyphicon glyphicon-off"></span>Sign Out
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                <a href="{{ route('settings') }}" class="no-ajax"><span class="glyphicon glyphicon-home"></span>Nastavitve</a>
                             </li>
                         </ul>
 
@@ -123,7 +114,7 @@
                 <!-- Footer Navigation -->
                 <div class="rw-footer-navigation">
                     <ul>
-                        <li class="settings"><a data-toggle="tooltip" data-placement="top" title="Settings" id="settings-nav-trigger"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a></li>
+                        <li class="settings"><a href="{{ route('settings') }}" data-toggle="tooltip" data-placement="top" title="Settings" id="settings-nav-trigger"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a></li>
                         <li class="dashboard rw-hide"><a id="dashboard-nav-trigger" data-toggle="tooltip" data-placement="top" title="Dashboard"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
                     </ul>
                 </div>
@@ -221,7 +212,7 @@
                                     {{ $review->review_text }}
                                 </td>
                                 <td>
-                                    <a href="#">Ogled slike</a>
+                                    <a href="{{ route('images.public', [$review->user->id, $review->picture_url]) }}">Ogled slike</a>
                                     {!! ($review->review == 'Disapproved') ? '' : '<a href="#">Ogled objave</a>' !!}
                                 </td>
                                 <td>

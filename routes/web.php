@@ -64,4 +64,7 @@ Route::group(['prefix' => 'home'], function() {
     Route::get('/facebook', 'FacebookController@show')->name('facebook');
     Route::get('/facebook/review/{id}', 'FacebookController@showOne')->name('facebook.review');
     Route::post('/facebook/review/{id}', 'FacebookController@postOne')->name('facebook.review.post');
+    Route::get('/settings', 'SettingsController@show')->name('settings');
+    Route::post('/settings/password/master', 'SettingsController@master')->name('settings.master.post');
+    Route::post('/settings/password/slave', 'SettingsController@slave')->name('settings.slave.post');
 });

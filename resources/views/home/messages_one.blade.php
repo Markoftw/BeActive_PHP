@@ -66,9 +66,9 @@
                                 </form>
                             </li>
                             <li class="visible-xs"><!-- Small screen only -->
-                                <a href="#" class="no-ajax"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
+                                <a href="{{ route('settings') }}" class="no-ajax"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
                             </li>
-                            <li class="visible-xs">
+                            <!--<li class="visible-xs">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="no-ajax">
                                     <span class="glyphicon glyphicon-off"></span>Sign Out
                                 </a>
@@ -76,7 +76,7 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
-                            </li>
+                            </li>-->
                         </ul>
 
                         <!-- Settings Menu -->
@@ -123,7 +123,7 @@
                 <!-- Footer Navigation -->
                 <div class="rw-footer-navigation">
                     <ul>
-                        <li class="settings"><a data-toggle="tooltip" data-placement="top" title="Settings" id="settings-nav-trigger"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a></li>
+                        <li class="settings"><a href="{{ route('settings') }}" data-toggle="tooltip" data-placement="top" title="Settings" id="settings-nav-trigger"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a></li>
                         <li class="dashboard rw-hide"><a id="dashboard-nav-trigger" data-toggle="tooltip" data-placement="top" title="Dashboard"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
                     </ul>
                 </div>
@@ -230,6 +230,7 @@
                                         </div>
                                     @endforeach
                                     <hr/>
+                                    @if(is_null($ticket[0]['closed_at']))
                                     <div>
                                         <form class="inline-support-form" method="POST" action="{{ route('messages.one.post', $ticket[0]['ticket_group']) }}">
                                             {{ csrf_field() }}
@@ -254,6 +255,7 @@
                                             </div>
                                         </form>
                                     </div>
+                                    @endif
                                 </div>
                             </li>
                         </ul>

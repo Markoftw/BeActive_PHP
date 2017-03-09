@@ -113,21 +113,10 @@
                                 </ul>
                             </li>
                             <li class="visible-xs"><!-- Small screen only -->
-                                <a href="{{ url('/home') }}" class="no-ajax"><span
-                                            class="glyphicon glyphicon-home"></span>Dashboard</a>
+                                <a href="{{ route('settings') }}" class="no-ajax"><span
+                                            class="glyphicon glyphicon-home"></span>Nastavitve</a>
                             </li>
-                            <li class="visible-xs">
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                   class="no-ajax">
-                                    <span class="glyphicon glyphicon-off"></span>Sign Out
-                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
                         </ul>
 
                     </div><!-- end .panel -->
@@ -141,7 +130,7 @@
                 <!-- Footer Navigation -->
                 <div class="rw-footer-navigation">
                     <ul>
-                        <li class="settings"><a data-toggle="tooltip" data-placement="top" title="Settings"
+                        <li class="settings"><a href="{{ route('settings') }}" data-toggle="tooltip" data-placement="top" title="Settings"
                                                 id="settings-nav-trigger"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
                         </li>
                         <li class="dashboard rw-hide"><a id="dashboard-nav-trigger" data-toggle="tooltip"

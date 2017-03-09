@@ -41,7 +41,7 @@
                             <li>
                                 <a href="{{ url('/home') }}"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
                             </li>
-                            <li>
+                            <li data-active="user-statistics">
                                 <a href="{{ url('/home/statistics') }}"><span class="glyphicon glyphicon-signal"></span>Statistika</a>
                             </li>
                             <li>
@@ -50,7 +50,7 @@
                             <li>
                                 <a href="{{ url('/home/pictures') }}"><span class="glyphicon glyphicon-picture"></span>Slike</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="{{ url('/home/messages') }}"><span class="glyphicon glyphicon-envelope"></span>Sporočila</a>
                             </li>
                             <li>
@@ -66,9 +66,9 @@
                                 </form>
                             </li>
                             <li class="visible-xs"><!-- Small screen only -->
-                                <a href="{{ route('settings') }}" class="no-ajax"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
+                                <a href="#" class="no-ajax"><span class="glyphicon glyphicon-cog"></span>Nastavitve</a>
                             </li>
-                            <!--<li class="visible-xs">
+                            <li class="visible-xs">
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="no-ajax">
                                     <span class="glyphicon glyphicon-off"></span>Sign Out
                                 </a>
@@ -76,7 +76,7 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
-                            </li>-->
+                            </li>
                         </ul>
 
                         <!-- Settings Menu -->
@@ -99,16 +99,7 @@
                                 </ul>
                             </li>
                             <li class="visible-xs"><!-- Small screen only -->
-                                <a href="{{ url('/home') }}" class="no-ajax"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
-                            </li>
-                            <li class="visible-xs">
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="no-ajax">
-                                    <span class="glyphicon glyphicon-off"></span>Sign Out
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                <a href="{{ route('settings') }}" class="no-ajax"><span class="glyphicon glyphicon-home"></span>Nastavitve</a>
                             </li>
                         </ul>
 
@@ -141,7 +132,7 @@
             <!-- Main Header -->
             <div class="navbar rw-navbar-static-top" role="complementary">
                 <div class="navbar-text visible-lg">Tesla Motors d.o.o.</div><!-- end .nav-text -->
-                <div class="navbar-header"><span class="navbar-brand" id="title">Sporočila</span></div><!-- end .nav-header -->
+                <div class="navbar-header"><span class="navbar-brand" id="title">Nastavitve</span></div><!-- end .nav-header -->
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="status on" id="socket-status"><span></span>Online</li>
@@ -159,40 +150,110 @@
             </div>
             <!-- end Main Header -->
 
-            <!-- Main Container -->
             <div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
                 <header>
                     <div>
-                        <h1>Sporočila</h1>
-                    </div>
-                    <div class="buttons pull-right">
-                        <h1><a class="icon" title="Novo" href="{{ route('messages.new') }}"><span class="glyphicon glyphicon-plus"></span></a></h1>
+                        <h1>Nastavitve</h1>
                     </div>
                 </header><hr/>
-
-                @if(count($messages))
-                <div class="messages default clearfix">
-                    <ul class="rw-messages">
-                        @foreach($messages as $message)
-                            <li class="{{ $message['status'] == 'Zaprto' ? 'blue' : 'green' }}">
-                                <a href="{{ route('messages.one', $message['ticket_group']) }}">
-                                    <span class="dot"><span></span></span>
-                                    <div class="body">
-                                        <span class="title">{{ $message['title'] }} ({{ $message['status'] }})</span>
-                                        <span class="value">{{ $message['naslov'] }}</span>
+                <div class="clearfix row">
+                    <div class="col-md-4">
+                        @if(isset($success) && $success)
+                            <div class="row">
+                                <div class="alert clearfix alert-success alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Geslo uspešno spremenjeno!</p>
+                                </div>
+                            </div>
+                        @endif
+                        @if(isset($success) && !$success)
+                            <div class="row">
+                                <div class="alert clearfix alert-danger alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Vaše trenutno geslo se ne ujema!</p>
+                                </div>
+                            </div>
+                        @endif
+                        <form name="geslo1" method="POST" action="{{ route('settings.master.post') }}" role="form">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="old_password">Trenutno geslo</label>
+                                        <input type="password" class="input" id="old_password" name="old_password" required/>
+                                        @if ($errors->has('old_password'))
+                                            <span class="help-block"><strong>{{ $errors->first('old_password') }}</strong></span>
+                                        @endif
                                     </div>
-                                    <span class="time ago" data-timer="0" title="Wed Feb 19 2014 04:30:30 GMT+0100 (Central Europe Standard Time)">Feb 19 2014 04:30</span>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
+                                    <div class="form-group">
+                                        <label class="control-label" for="password">Novo geslo</label>
+                                        <input type="password" class="input" id="password" name="password" required/>
+                                        @if ($errors->has('password'))
+                                            <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="password_confirmation">Ponovite novo geslo</label>
+                                        <input type="password" class="input" id="password_confirmation" name="password_confirmation" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-buttons">
+                                <div class="col-md-12">
+                                    <button class="btn btn-lg btn-primary">Shrani</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        @if(isset($success_slave) && $success_slave)
+                            <div class="row">
+                                <div class="alert clearfix alert-success alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Natakarjevo geslo uspešno spremenjeno!</p>
+                                </div>
+                            </div>
+                        @endif
+                        @if(isset($success_slave) && !$success_slave)
+                            <div class="row">
+                                <div class="alert clearfix alert-danger alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Vaše trenutno geslo se ne ujema!</p>
+                                </div>
+                            </div>
+                        @endif
+                        <form name="geslo1" method="POST" action="{{ route('settings.slave.post') }}" role="form">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="old_slave_password">Trenutno natakarjevo geslo</label>
+                                        <input type="password" class="input" id="old_slave_password" name="old_slave_password" required/>
+                                        @if ($errors->has('old_slave_password'))
+                                            <span class="help-block"><strong>{{ $errors->first('old_slave_password') }}</strong></span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="slave_password">Novo natakarjevo geslo</label>
+                                        <input type="password" class="input" id="slave_password" name="slave_password" required/>
+                                        @if ($errors->has('slave_password'))
+                                            <span class="help-block"><strong>{{ $errors->first('slave_password') }}</strong></span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="slave_password_confirmation">Ponovite novo natakarjevo geslo</label>
+                                        <input type="password" class="input" id="slave_password_confirmation" name="slave_password_confirmation" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-buttons">
+                                <div class="col-md-12">
+                                    <button class="btn btn-lg btn-primary">Shrani</button>
+                                </div>
+                            </div>
+                        </form>
                 </div>
-                @else
-                    Brez sporočil. Ustvarite sporočilo s klikom na "Novo".
-                @endif
-
             </div>
-            <!-- end RW Container -->
         </div>
         <!-- end Right Panel - Main Content -->
     </div><!-- end Main Container -->
