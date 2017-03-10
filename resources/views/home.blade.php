@@ -125,35 +125,14 @@
         </div>
         <!-- end Left Panel - Main Navigation -->
 
-
         <!-- Right Panel - Main Content -->
         <div class="rw-right-panel">
-
             <!-- Main Header -->
-            <div class="navbar rw-navbar-static-top" role="complementary">
-                <div class="navbar-text visible-lg">Tesla Motors d.o.o.</div><!-- end .nav-text -->
-                <div class="navbar-header"><span class="navbar-brand" id="title">Dashboard</span></div><!-- end .nav-header -->
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="status on" id="socket-status"><span></span>Online</li>
-                        <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <span class="glyphicon glyphicon-off"></span>
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                </div><!-- end .navbar-collapse -->
-            </div>
+            @include('layouts.company_header', ['page' => 'Dashboard'])
             <!-- end Main Header -->
 
             <!-- Main Container -->
             <<div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
-
-
                 <!-- Dashboard Container -->
                 <div class="rw-dashboard-container dashboard-main clearfix">
 
@@ -223,7 +202,6 @@
                 </div>
                 <!-- end Dashboard Container -->
 
-
                 <!-- Right -->
                 <div class="dashboard-messages">
 
@@ -286,7 +264,6 @@
                     </div>
                 </div>
                 <!-- end Right -->
-
 
                 <!-- Feature Dashboard
                 <div class="rw-feature-dashboard clearfix">

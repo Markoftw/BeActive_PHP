@@ -67,4 +67,6 @@ Route::group(['prefix' => 'home'], function() {
     Route::get('/settings', 'SettingsController@show')->name('settings');
     Route::post('/settings/password/master', 'SettingsController@master')->name('settings.master.post');
     Route::post('/settings/password/slave', 'SettingsController@slave')->name('settings.slave.post');
+    Route::post('/settings/company', 'SettingsController@company')->name('settings.company.post');
+    Route::post('/settings/mail', 'SettingsController@mail')->name('settings.mail.post');
 });

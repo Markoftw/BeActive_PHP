@@ -130,24 +130,7 @@
         <div class="rw-right-panel">
 
             <!-- Main Header -->
-            <div class="navbar rw-navbar-static-top" role="complementary">
-                <div class="navbar-text visible-lg">Tesla Motors d.o.o.</div><!-- end .nav-text -->
-                <div class="navbar-header"><span class="navbar-brand" id="title">Nastavitve</span></div><!-- end .nav-header -->
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="status on" id="socket-status"><span></span>Online</li>
-                        <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <span class="glyphicon glyphicon-off"></span>
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    </ul>
-                </div><!-- end .navbar-collapse -->
-            </div>
+            @include('layouts.company_header', ['page' => 'Nastavitve'])
             <!-- end Main Header -->
 
             <div class="rw-container" id="frame"><!-- use .rw-container instead of .container on private_template -->
@@ -253,6 +236,79 @@
                             </div>
                         </form>
                 </div>
+                    <div class="col-md-4">
+                        @if(isset($podjetje) && $podjetje)
+                            <div class="row">
+                                <div class="alert clearfix alert-success alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Ime podjetja uspešno spremenjeno!</p>
+                                </div>
+                            </div>
+                        @endif
+                        @if(isset($podjetje) && !$podjetje)
+                            <div class="row">
+                                <div class="alert clearfix alert-danger alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Napaka med spreminjanjem imena podjetja!</p>
+                                </div>
+                            </div>
+                        @endif
+                        @if(isset($posta) && $posta)
+                            <div class="row">
+                                <div class="alert clearfix alert-success alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>E-poštni naslov uspešno spremenjen!</p>
+                                </div>
+                            </div>
+                        @endif
+                        @if(isset($posta) && !$posta)
+                            <div class="row">
+                                <div class="alert clearfix alert-danger alert-dismissable col-md-12">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <p>Napaka med spreminjanjem e-poštnega naslova!</p>
+                                </div>
+                            </div>
+                        @endif
+                        <form name="geslo1" method="POST" action="{{ route('settings.company.post') }}" role="form">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="podjetje">Ime podjetja</label>
+                                        <input type="text" class="input" id="podjetje" name="podjetje" value="{{ $company }}" required autocomplete="off"/>
+                                        @if ($errors->has('podjetje'))
+                                            <span class="help-block"><strong>{{ $errors->first('podjetje') }}</strong></span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-buttons">
+                                <div class="col-md-12">
+                                    <button class="btn btn-lg btn-primary">Shrani</button>
+                                </div>
+                            </div>
+                        </form>
+                            <hr/>
+                        <form name="geslo1" method="POST" action="{{ route('settings.mail.post') }}" role="form">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="mail">E-poštni naslov za mesečno statistiko</label>
+                                        <input type="email" class="input" id="mail" name="mail" value="{{ $mail }}" required/>
+                                        @if ($errors->has('mail'))
+                                            <span class="help-block"><strong>{{ $errors->first('mail') }}</strong></span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-buttons">
+                                <div class="col-md-12">
+                                    <button class="btn btn-lg btn-primary">Shrani</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
             </div>
         </div>
         <!-- end Right Panel - Main Content -->
