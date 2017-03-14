@@ -88,7 +88,7 @@ class AuthController extends Controller
         }
     }
 
-    public function getUser()
+    public function getUser(Request $request)
     {
         $user_id = JWTAuth::parseToken()->authenticate()->id;
         $user = User::where('id', $user_id)->first();
@@ -96,7 +96,9 @@ class AuthController extends Controller
         if ($user) {
             $user->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
             $user->save();
-            return response()->json(['success' => true, 'username' => $user->name]);
+            $status = $request->only('status');
+
+            return response()->json(['success' => true, 'username' => $user->name, 'status' => $status['status']]);
         }
 
         return abort(404);

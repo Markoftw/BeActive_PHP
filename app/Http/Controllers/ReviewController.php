@@ -27,13 +27,14 @@ class ReviewController extends Controller
 
     public function showCreate()
     {
-        return view('reviews_single');
+        $users = User::all();
+        return view('reviews_single')->with('users', $users);
     }
 
     public function create(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|min:1',
+            'username' => 'required',
             'title' => 'required|min:2|max:25',
             'message' => 'required|min:5|max:50',
             'imgtitle' => 'required|min:5|max:255',
@@ -71,14 +72,24 @@ class ReviewController extends Controller
                             'smallIcon' => 'small_icon'
                         );
 
+                        $reg_ids = [];
+
+                        foreach ($user[0]->devices as $device) {
+                            array_push($reg_ids, $device->device_token);
+                        }
+
                         $fields = array(
-                            'registration_ids' => [$user[0]->devices[0]->device_token],
+                            //'registration_ids' => [$user[0]->devices[0]->device_token],
+                            'registration_ids' => $reg_ids,
                             'data' => $msg
                         );
 
 
                         $this->sendBroadcast($fields);
-                        return view('reviews_single')->with('message', true);
+                        //return view('reviews_single')->with('message', true);
+                        $reviews = Review::with('user')->where('review', 'waiting')->orderBy('created_at', 'desc')->get();
+                        $reviews_done = Review::with('user')->where('review', '!=' , 'waiting')->orderBy('updated_at', 'desc')->get();
+                        return redirect('reviews')->with('reviews', $reviews)->with('reviews_done', $reviews_done);
                     }
                     return abort(404);
                 }

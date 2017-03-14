@@ -24,7 +24,11 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="username">User:</label>
-                                <input type="text" id="username" name="username" class="form-control" placeholder="Username" />
+                                <select class="form-control" id="username" name="username">
+                                @foreach($users as $user)
+                                    <option value="{{ $user->name }}">{{ $user->name }}</option>
+                                @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="imgtitle">Post message:</label>
