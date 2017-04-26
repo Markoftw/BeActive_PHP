@@ -190,7 +190,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Zadnja sprememba:</td>
-                                                    <td>{{ $ticket[0]['updated_at'] }}</td>
+                                                    @foreach($ticket as $comment)
+                                                        @if($loop->last)
+                                                            <td>{{ $comment->updated_at }}</td>
+                                                        @endif
+                                                    @endforeach
                                                 </tr>
                                                 <tr>
                                                     <td>Zaprto:</td>

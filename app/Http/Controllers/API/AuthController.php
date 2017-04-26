@@ -65,6 +65,7 @@ class AuthController extends Controller
             $user_updater->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
             $user_updater->save();
 
+            //Check if device exists
             auth()->user()->device(
                 new Device(['device_type' => 'Member', 'device_token' => $device_token['device_token']])
             );
@@ -76,6 +77,7 @@ class AuthController extends Controller
             $last_seen->last_online = date("Y-m-j H:i:s"); //2017-02-14 09:31:40
             $last_seen->save();
 
+            //Check if device exists
             $device = new Device();
             $device->user_id = $user_guest[0]->id;
             $device->device_type = 'Guest';
